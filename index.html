@@ -1,1 +1,186 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NiftyDataHub</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+background:#111;
+border-bottom:2px solid #00f0ff;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+.menu{
+font-size:30px;
+color:#00f0ff;
+cursor:pointer;
+}
+
+/* NAVIGATION */
+
+nav{
+display:flex;
+gap:15px;
+padding:15px 20px;
+background:#151515;
+overflow-x:auto;
+}
+
+nav a{
+text-decoration:none;
+color:#00f0ff;
+background:#1f1f1f;
+padding:10px 16px;
+border-radius:10px;
+white-space:nowrap;
+}
+
+/* HERO */
+
+.hero{
+padding:40px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.hero p{
+color:#aaa;
+font-size:18px;
+}
+
+/* MARKET SECTION */
+
+.market-section{
+padding:20px;
+}
+
+.section-title{
+font-size:28px;
+margin-bottom:20px;
+}
+
+.market-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.card{
+background:#161616;
+padding:20px;
+border-radius:18px;
+border:1px solid #00f0ff44;
+}
+
+.card h3{
+color:#00f0ff;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:28px;
+font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:30px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">NiftyDataHub</div>
+<div class="menu">☰</div>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Markets</a>
+<a href="#">Options</a>
+<a href="#">Charts</a>
+<a href="#">News</a>
+</nav>
+
+<section class="hero">
+<h1>Indian Stock Market Dashboard</h1>
+<p>Live market overview, charts and analytics</p>
+</section>
+
+<section class="market-section">
+
+<h2 class="section-title">Market Overview</h2>
+
+<div class="market-grid">
+
+<div class="card">
+<h3>NIFTY 50</h3>
+<p>24,500</p>
+</div>
+
+<div class="card">
+<h3>BANKNIFTY</h3>
+<p>52,000</p>
+</div>
+
+<div class="card">
+<h3>SENSEX</h3>
+<p>80,000</p>
+</div>
+
+<div class="card">
+<h3>FINNIFTY</h3>
+<p>24,300</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+NiftyDataHub © 2026
+</footer>
+
+</body>
+</html>
