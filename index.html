@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -28,7 +29,7 @@ position:sticky;
 top:0;
 z-index:1000;
 background:#0d0d0d;
-padding:16px 20px;
+padding:18px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -36,64 +37,69 @@ border-bottom:2px solid #00d9ff;
 }
 
 .logo{
-font-size:30px;
+font-size:32px;
 font-weight:bold;
 color:#00d9ff;
 }
 
 nav{
 display:flex;
-gap:20px;
+gap:22px;
 }
 
 nav a{
-text-decoration:none;
 color:white;
+text-decoration:none;
 font-size:15px;
+transition:.3s;
 }
 
 nav a:hover{
 color:#00d9ff;
 }
 
+/* MARKET STATUS */
+
+.market-status{
+background:#101010;
+padding:10px;
+text-align:center;
+font-size:14px;
+color:#00ff88;
+border-bottom:1px solid #222;
+}
+
 /* HERO */
 
 .hero{
-padding:70px 20px 50px;
+padding:90px 20px;
 text-align:center;
 }
 
 .hero h1{
-font-size:55px;
-margin-bottom:15px;
+font-size:60px;
+margin-bottom:20px;
 }
 
 .hero p{
-font-size:20px;
+font-size:22px;
 color:#999;
-margin-bottom:30px;
+margin-bottom:35px;
 }
 
-.hero button{
-padding:15px 30px;
-border:none;
+.hero-btn{
+display:inline-block;
+padding:15px 35px;
 background:#00d9ff;
-border-radius:12px;
-font-size:18px;
+color:black;
 font-weight:bold;
-cursor:pointer;
+text-decoration:none;
+border-radius:12px;
+transition:.3s;
 }
 
-/* STATUS BAR */
-
-.status-bar{
-background:#101010;
-padding:12px;
-text-align:center;
-font-size:15px;
-border-top:1px solid #222;
-border-bottom:1px solid #222;
-color:#00ff88;
+.hero-btn:hover{
+transform:scale(1.05);
 }
 
 /* TITLES */
@@ -101,15 +107,15 @@ color:#00ff88;
 .section-title{
 font-size:42px;
 text-align:center;
-margin:60px 0 30px;
+margin:70px 0 30px;
 color:#00d9ff;
 }
 
-/* INDEX CARDS */
+/* INDICES */
 
-.index-grid{
+.indices-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 padding:20px;
 }
@@ -117,58 +123,59 @@ padding:20px;
 .index-card{
 background:#111;
 padding:25px;
-border-radius:20px;
+border-radius:18px;
 border:1px solid #222;
 transition:.3s;
 }
 
 .index-card:hover{
-transform:translateY(-5px);
 border-color:#00d9ff;
-box-shadow:0 0 20px rgba(0,217,255,0.2);
+transform:translateY(-5px);
 }
 
 .index-name{
-font-size:24px;
+font-size:28px;
 color:#00d9ff;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
 .index-price{
-font-size:42px;
+font-size:48px;
 font-weight:bold;
 margin-bottom:10px;
+}
+
+.index-change{
+font-size:20px;
+font-weight:bold;
 }
 
 .green{
 color:#00ff88;
-font-weight:bold;
 }
 
 .red{
 color:#ff4d4d;
-font-weight:bold;
 }
 
 /* SEARCH */
 
 .search-box{
-padding:0 20px;
-margin-bottom:20px;
+padding:20px;
 }
 
-.search-box input{
+#searchInput{
 width:100%;
 padding:16px;
 background:#111;
 border:1px solid #222;
 border-radius:12px;
 color:white;
-font-size:16px;
+font-size:18px;
 outline:none;
 }
 
-/* TABLE */
+/* STOCK TABLE */
 
 .table-container{
 overflow-x:auto;
@@ -177,71 +184,62 @@ padding:20px;
 
 table{
 width:100%;
-min-width:850px;
-border-collapse:separate;
-border-spacing:0 12px;
+border-collapse:collapse;
+min-width:700px;
 }
 
-thead th{
+th{
 background:#00d9ff;
 color:black;
-padding:16px;
-font-size:15px;
+padding:18px;
+font-size:16px;
 text-align:left;
 }
 
-tbody tr{
-background:#111;
-transition:.3s;
+td{
+padding:18px;
+border-bottom:1px solid #1d1d1d;
+background:#0f0f0f;
 }
 
-tbody tr:hover{
-background:#171717;
-transform:scale(1.01);
-}
-
-tbody td{
-padding:18px 15px;
-font-size:15px;
-}
-
-.stock-name{
-font-weight:bold;
+tr:hover td{
+background:#151515;
 }
 
 /* TOP MOVERS */
 
-.market-boxes{
+.movers{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 padding:20px;
 }
 
-.market-box{
+.mover-card{
 background:#111;
 padding:25px;
-border-radius:20px;
+border-radius:18px;
 border:1px solid #222;
 }
 
-.market-box h3{
-font-size:28px;
+.mover-card h3{
+font-size:30px;
 margin-bottom:20px;
 color:#00d9ff;
 }
 
-.market-item{
+.mover-item{
 display:flex;
 justify-content:space-between;
 margin-bottom:15px;
+font-size:18px;
 }
 
 /* FOOTER */
 
 footer{
-margin-top:50px;
-padding:30px;
+margin-top:70px;
+padding:40px;
 text-align:center;
 background:#0d0d0d;
 border-top:2px solid #00d9ff;
@@ -253,32 +251,30 @@ color:#777;
 @media(max-width:768px){
 
 .hero h1{
-font-size:40px;
+font-size:42px;
 }
 
 .hero p{
-font-size:17px;
+font-size:18px;
 }
 
 .section-title{
 font-size:34px;
 }
 
-nav{
-display:none;
-}
-
 .index-price{
-font-size:34px;
+font-size:38px;
 }
 
-table{
-min-width:900px;
+nav{
+gap:12px;
+font-size:13px;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -298,67 +294,63 @@ NiftyDataHub
 
 </header>
 
-<div class="status-bar">
+<div class="market-status">
 🟢 MARKET OPEN • Real Delayed Data • Auto Refresh Every 60 Seconds
 </div>
 
+<!-- HERO -->
+
 <section class="hero">
 
-<h1>Indian Stock Market Dashboard</h1>
+<h1>
+Indian Stock Market Dashboard
+</h1>
 
 <p>
 Professional Real-Time Indian Market Analytics
 </p>
 
-<button>
+<a href="#" class="hero-btn">
 Explore Market
-</button>
+</a>
 
 </section>
+
+<!-- INDICES -->
 
 <h2 class="section-title">
 Live Market Indices
 </h2>
 
-<section class="index-grid">
+<section class="indices-grid">
 
 <div class="index-card">
 <div class="index-name">NIFTY 50</div>
-<div class="index-price">24,850</div>
-<div class="green">▲ +0.65%</div>
+<div class="index-price" id="nifty50-price">Loading...</div>
+<div class="index-change" id="nifty50-change">--</div>
 </div>
 
 <div class="index-card">
 <div class="index-name">BANK NIFTY</div>
-<div class="index-price">52,420</div>
-<div class="green">▲ +0.72%</div>
+<div class="index-price" id="banknifty-price">Loading...</div>
+<div class="index-change" id="banknifty-change">--</div>
 </div>
 
 <div class="index-card">
 <div class="index-name">FIN NIFTY</div>
-<div class="index-price">24,980</div>
-<div class="green">▲ +0.44%</div>
+<div class="index-price" id="finnifty-price">Loading...</div>
+<div class="index-change" id="finnifty-change">--</div>
 </div>
 
 <div class="index-card">
 <div class="index-name">SENSEX</div>
-<div class="index-price">81,250</div>
-<div class="green">▲ +0.51%</div>
-</div>
-
-<div class="index-card">
-<div class="index-name">MIDCAP NIFTY</div>
-<div class="index-price">13,420</div>
-<div class="red">▼ -0.14%</div>
-</div>
-
-<div class="index-card">
-<div class="index-name">BANKEX</div>
-<div class="index-price">61,880</div>
-<div class="green">▲ +0.41%</div>
+<div class="index-price" id="sensex-price">Loading...</div>
+<div class="index-change" id="sensex-change">--</div>
 </div>
 
 </section>
+
+<!-- SEARCH -->
 
 <h2 class="section-title">
 Nifty 50 Screener
@@ -366,14 +358,16 @@ Nifty 50 Screener
 
 <div class="search-box">
 
-<input 
+<input
 type="text"
 id="searchInput"
 placeholder="Search Stock..."
-onkeyup="searchStock()"
+onkeyup="searchStocks()"
 >
 
 </div>
+
+<!-- TABLE -->
 
 <div class="table-container">
 
@@ -391,7 +385,7 @@ onkeyup="searchStock()"
 
 </thead>
 
-<tbody id="tableBody">
+<tbody id="stockBody">
 
 </tbody>
 
@@ -399,132 +393,179 @@ onkeyup="searchStock()"
 
 </div>
 
+<!-- TOP MOVERS -->
+
 <h2 class="section-title">
 Top Market Movers
 </h2>
 
-<section class="market-boxes">
+<section class="movers">
 
-<div class="market-box">
+<div class="mover-card">
 
 <h3>Top Gainers</h3>
 
-<div class="market-item">
-<span>ONGC</span>
-<span class="green">+5.85%</span>
-</div>
+<div id="gainers">
 
-<div class="market-item">
-<span>TATASTEEL</span>
-<span class="green">+0.63%</span>
-</div>
-
-<div class="market-item">
-<span>NTPC</span>
-<span class="green">+0.93%</span>
+<div class="mover-item">
+<span>Loading...</span>
 </div>
 
 </div>
 
-<div class="market-box">
+</div>
+
+<div class="mover-card">
 
 <h3>Top Losers</h3>
 
-<div class="market-item">
-<span>TCS</span>
-<span class="red">-3.81%</span>
+<div id="losers">
+
+<div class="mover-item">
+<span>Loading...</span>
 </div>
 
-<div class="market-item">
-<span>UPL</span>
-<span class="red">-3.86%</span>
-</div>
-
-<div class="market-item">
-<span>HCLTECH</span>
-<span class="red">-3.24%</span>
 </div>
 
 </div>
 
 </section>
 
+<!-- FOOTER -->
+
 <footer>
+
 © 2026 NiftyDataHub • Educational Purpose Only
+
 </footer>
 
 <script>
 
-const sheetURL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?output=csv";
+const STOCKS_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=0&single=true&output=csv";
 
-async function fetchData(){
+const INDICES_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=1281901121&single=true&output=csv";
 
-const response = await fetch(sheetURL);
+/* LOAD INDICES */
+
+async function loadIndices(){
+
+const response = await fetch(INDICES_URL);
+
 const data = await response.text();
 
 const rows = data.split("\n").slice(1);
 
-let html = "";
+const indices = rows.map(row => row.split(","));
+
+updateIndex(
+"nifty50",
+indices[0][1],
+indices[0][2]
+);
+
+updateIndex(
+"banknifty",
+indices[1][1],
+indices[1][2]
+);
+
+updateIndex(
+"finnifty",
+indices[2][1],
+indices[2][2]
+);
+
+updateIndex(
+"sensex",
+indices[3][1],
+indices[3][2]
+);
+
+}
+
+function updateIndex(name,price,change){
+
+document.getElementById(name+"-price").innerText =
+Number(price).toLocaleString();
+
+const changeElement =
+document.getElementById(name+"-change");
+
+changeElement.innerText = change;
+
+if(parseFloat(change) >= 0){
+
+changeElement.classList.add("green");
+changeElement.classList.remove("red");
+
+}else{
+
+changeElement.classList.add("red");
+changeElement.classList.remove("green");
+
+}
+
+}
+
+/* LOAD STOCKS */
+
+async function loadStocks(){
+
+const response = await fetch(STOCKS_URL);
+
+const data = await response.text();
+
+const rows = data.split("\n").slice(1);
+
+const tableBody =
+document.getElementById("stockBody");
+
+tableBody.innerHTML = "";
+
+let stocks = [];
 
 rows.forEach(row => {
 
 const cols = row.split(",");
 
-if(cols.length > 4){
+if(cols.length < 5) return;
 
-const stock = cols[0];
-const price = cols[1];
-const high = cols[2];
-const low = cols[3];
-const change = cols[4];
+stocks.push(cols);
 
-const color =
-parseFloat(change) >= 0
-? "green"
-: "red";
+const tr = document.createElement("tr");
 
-html += `
+const change =
+parseFloat(cols[4]);
 
-<tr>
+tr.innerHTML = `
 
-<td class="stock-name">
-${stock}
+<td>${cols[0]}</td>
+
+<td>₹${cols[1]}</td>
+
+<td>${cols[2]}</td>
+
+<td>${cols[3]}</td>
+
+<td class="${change >= 0 ? 'green':'red'}">
+${cols[4]}%
 </td>
-
-<td>
-₹${price}
-</td>
-
-<td>
-${high}
-</td>
-
-<td>
-${low}
-</td>
-
-<td class="${color}">
-${change}%
-</td>
-
-</tr>
 
 `;
 
-}
+tableBody.appendChild(tr);
 
 });
 
-document.getElementById("tableBody").innerHTML = html;
+loadMovers(stocks);
 
 }
 
-fetchData();
+/* SEARCH */
 
-setInterval(fetchData,60000);
-
-function searchStock(){
+function searchStocks(){
 
 let input =
 document.getElementById("searchInput")
@@ -532,7 +573,7 @@ document.getElementById("searchInput")
 .toUpperCase();
 
 let tr =
-document.querySelectorAll("#tableBody tr");
+document.querySelectorAll("#stockBody tr");
 
 tr.forEach(row => {
 
@@ -552,6 +593,51 @@ row.style.display = "none";
 });
 
 }
+
+/* TOP MOVERS */
+
+function loadMovers(stocks){
+
+let sorted =
+stocks.sort((a,b)=>
+parseFloat(b[4]) - parseFloat(a[4])
+);
+
+let gainers =
+sorted.slice(0,3);
+
+let losers =
+sorted.slice(-3);
+
+document.getElementById("gainers").innerHTML =
+gainers.map(stock => `
+
+<div class="mover-item">
+<span>${stock[0]}</span>
+<span class="green">${stock[4]}%</span>
+</div>
+
+`).join("");
+
+document.getElementById("losers").innerHTML =
+losers.map(stock => `
+
+<div class="mover-item">
+<span>${stock[0]}</span>
+<span class="red">${stock[4]}%</span>
+</div>
+
+`).join("");
+
+}
+
+/* AUTO LOAD */
+
+loadIndices();
+loadStocks();
+
+setInterval(loadIndices,60000);
+setInterval(loadStocks,60000);
 
 </script>
 
