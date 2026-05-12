@@ -18,10 +18,12 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#0b0b0b;
+background:#050505;
 color:white;
 overflow-x:hidden;
 }
+
+/* HEADER */
 
 header{
 position:sticky;
@@ -63,10 +65,12 @@ nav a:hover{
 color:#00e5ff;
 }
 
+/* HERO */
+
 .hero{
 padding:90px 20px;
 text-align:center;
-background:linear-gradient(to bottom,#111,#0b0b0b);
+background:linear-gradient(to bottom,#111,#050505);
 }
 
 .hero h1{
@@ -89,7 +93,14 @@ font-size:20px;
 font-weight:bold;
 border-radius:12px;
 text-decoration:none;
+transition:.3s;
 }
+
+.hero-btn:hover{
+transform:scale(1.05);
+}
+
+/* SECTION */
 
 .section-title{
 font-size:42px;
@@ -97,6 +108,8 @@ text-align:center;
 margin:60px 0 30px;
 color:#00e5ff;
 }
+
+/* CARDS */
 
 .cards{
 display:grid;
@@ -110,6 +123,14 @@ background:#161616;
 padding:30px;
 border-radius:20px;
 border:1px solid #2b2b2b;
+transition:.3s;
+box-shadow:0 0 10px rgba(0,229,255,0.05);
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:#00e5ff;
+box-shadow:0 0 20px rgba(0,229,255,0.25);
 }
 
 .card h2{
@@ -129,6 +150,8 @@ font-size:18px;
 color:#00ff88;
 }
 
+/* SEARCH */
+
 .screener{
 padding:20px;
 }
@@ -145,6 +168,8 @@ margin-bottom:20px;
 outline:none;
 }
 
+/* STOCK LIST */
+
 .stock-list{
 display:flex;
 flex-direction:column;
@@ -153,13 +178,19 @@ gap:15px;
 
 .stock-item{
 display:grid;
-grid-template-columns:repeat(5,1fr);
+grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+gap:10px;
 align-items:center;
 background:#161616;
 padding:18px;
 border-radius:14px;
 border:1px solid #2a2a2a;
-text-align:center;
+transition:.3s;
+}
+
+.stock-item:hover{
+border-color:#00e5ff;
+transform:translateY(-3px);
 }
 
 .green{
@@ -172,6 +203,8 @@ color:#ff4d4d;
 font-weight:bold;
 }
 
+/* FOOTER */
+
 footer{
 margin-top:60px;
 padding:40px 20px;
@@ -183,6 +216,8 @@ border-top:2px solid #00e5ff;
 footer p{
 color:#888;
 }
+
+/* MOBILE */
 
 @media(max-width:768px){
 
@@ -214,10 +249,13 @@ font-size:42px;
 font-size:18px;
 }
 
+.section-title{
+font-size:32px;
+}
+
 .stock-item{
-grid-template-columns:1fr;
-gap:8px;
-font-size:14px;
+font-size:13px;
+grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;
 }
 
 }
@@ -250,6 +288,8 @@ NiftyDataHub
 
 </header>
 
+<!-- HERO -->
+
 <section class="hero">
 
 <h1>Indian Stock Market Dashboard</h1>
@@ -258,11 +298,13 @@ NiftyDataHub
 Live Delayed Market Data & Trading Insights
 </p>
 
-<a href="#" class="hero-btn">
+<a href="#market" class="hero-btn">
 Explore Market
 </a>
 
 </section>
+
+<!-- MARKET OVERVIEW -->
 
 <h2 class="section-title">
 Market Overview
@@ -284,6 +326,8 @@ Market Overview
 
 </section>
 
+<!-- SCREENER -->
+
 <h2 class="section-title">
 Nifty 50 Screener
 </h2>
@@ -298,9 +342,16 @@ onkeyup="searchStock()"
 >
 
 <div class="stock-list">
+
+<p style="color:#888">
+Loading live stock data...
+</p>
+
 </div>
 
 </section>
+
+<!-- FOOTER -->
 
 <footer>
 
@@ -312,52 +363,38 @@ onkeyup="searchStock()"
 
 <script>
 
-function toggleMenu() {
-document.getElementById("menu").classList.toggle("show");
-}
-
-const stockSymbols = [
-"RELIANCE.NS",
-"TCS.NS",
-"INFY.NS",
-"HDFCBANK.NS",
-"ICICIBANK.NS",
-"SBIN.NS",
-"ITC.NS",
-"LT.NS",
-"AXISBANK.NS",
-"KOTAKBANK.NS"
-];
+const sheetURL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?output=csv";
 
 async function loadStocks() {
+
+try {
+
+const response = await fetch(sheetURL);
+
+const data = await response.text();
+
+const rows = data.split("\n").slice(1);
 
 const stockList =
 document.querySelector(".stock-list");
 
-stockList.innerHTML =
-"<p style='text-align:center'>Loading live market data...</p>";
-
-try {
-
-const url =
-"https://query1.finance.yahoo.com/v7/finance/quote?symbols=" +
-stockSymbols.join(",");
-
-const response =
-await fetch(url);
-
-const data =
-await response.json();
-
-const stocks =
-data.quoteResponse.result;
-
 stockList.innerHTML = "";
 
-stocks.forEach(stock => {
+rows.forEach(row => {
+
+const cols = row.split(",");
+
+if(cols.length < 5) return;
+
+const stock = cols[0];
+const price = cols[1];
+const high52 = cols[2];
+const low52 = cols[3];
+const change = cols[4];
 
 const color =
-stock.regularMarketChangePercent >= 0
+parseFloat(change) >= 0
 ? "green"
 : "red";
 
@@ -365,24 +402,16 @@ stockList.innerHTML += `
 
 <div class="stock-item">
 
-<span>
-${stock.symbol.replace(".NS","")}
-</span>
+<span>${stock}</span>
 
-<span>
-₹${stock.regularMarketPrice || "-"}
-</span>
+<span>₹${price}</span>
 
-<span>
-52H: ₹${stock.fiftyTwoWeekHigh || "-"}
-</span>
+<span>${high52}</span>
 
-<span>
-52L: ₹${stock.fiftyTwoWeekLow || "-"}
-</span>
+<span>${low52}</span>
 
 <span class="${color}">
-${stock.regularMarketChangePercent?.toFixed(2) || 0}%
+${change}%
 </span>
 
 </div>
@@ -391,23 +420,29 @@ ${stock.regularMarketChangePercent?.toFixed(2) || 0}%
 
 });
 
-} catch(error) {
+} catch(error){
 
-stockList.innerHTML =
-"<p style='color:red;text-align:center'>Unable to load live data.</p>";
-
-console.log(error);
-
-}
+document.querySelector(".stock-list")
+.innerHTML =
+"<p style='color:red'>Unable to load live data.</p>";
 
 }
 
-loadStocks();
+}
+
+function toggleMenu(){
+
+document
+.getElementById("menu")
+.classList.toggle("show");
+
+}
 
 function searchStock(){
 
 let input =
-document.getElementById("searchInput")
+document
+.getElementById("searchInput")
 .value
 .toUpperCase();
 
@@ -416,8 +451,7 @@ document.querySelectorAll(".stock-item");
 
 items.forEach(item => {
 
-let text =
-item.innerText;
+let text = item.innerText;
 
 if(text.toUpperCase().indexOf(input) > -1){
 
@@ -432,6 +466,10 @@ item.style.display = "none";
 });
 
 }
+
+loadStocks();
+
+setInterval(loadStocks, 600000);
 
 </script>
 
