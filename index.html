@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -96,6 +96,11 @@ color:black;
 font-weight:bold;
 text-decoration:none;
 border-radius:12px;
+transition:.3s;
+}
+
+.hero-btn:hover{
+transform:scale(1.05);
 }
 
 /* TITLES */
@@ -107,7 +112,7 @@ margin:60px 0 30px;
 color:#00d9ff;
 }
 
-/* LIVE INDICES */
+/* INDICES */
 
 .market-indices{
 padding:20px;
@@ -115,7 +120,7 @@ padding:20px;
 
 .indices-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:18px;
 }
 
@@ -137,11 +142,11 @@ box-shadow:0 0 20px rgba(0,217,255,0.15);
 color:#00d9ff;
 font-size:16px;
 font-weight:bold;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .index-price{
-font-size:30px;
+font-size:34px;
 font-weight:bold;
 margin-bottom:10px;
 }
@@ -176,50 +181,45 @@ font-size:16px;
 outline:none;
 }
 
-/* STOCK CARDS */
+/* TABLE */
 
-.stock-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:18px;
+.table-wrapper{
 padding:20px;
+overflow-x:auto;
 }
 
-.stock-card{
+.stock-table{
+width:100%;
+border-collapse:collapse;
+min-width:800px;
 background:#111;
-padding:20px;
 border-radius:18px;
-border:1px solid #222;
+overflow:hidden;
+}
+
+.stock-table thead{
+background:#00d9ff;
+color:black;
+}
+
+.stock-table th{
+padding:18px;
+text-align:left;
+font-size:15px;
+}
+
+.stock-table td{
+padding:18px;
+border-bottom:1px solid #222;
+font-size:15px;
+}
+
+.stock-table tbody tr{
 transition:.3s;
 }
 
-.stock-card:hover{
-transform:translateY(-5px);
-border-color:#00d9ff;
-}
-
-.stock-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-}
-
-.stock-name{
-font-size:18px;
-font-weight:bold;
-}
-
-.stock-price{
-font-size:28px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.stock-details{
-font-size:14px;
-color:#aaa;
-line-height:1.8;
+.stock-table tbody tr:hover{
+background:#161616;
 }
 
 /* MOVERS */
@@ -266,11 +266,11 @@ color:#777;
 @media(max-width:768px){
 
 .hero h1{
-font-size:40px;
+font-size:38px;
 }
 
 .hero p{
-font-size:18px;
+font-size:17px;
 }
 
 .section-title{
@@ -282,11 +282,7 @@ display:none;
 }
 
 .index-price{
-font-size:26px;
-}
-
-.stock-price{
-font-size:24px;
+font-size:28px;
 }
 
 }
@@ -334,7 +330,7 @@ Explore Market
 
 </section>
 
-<!-- LIVE MARKET INDICES -->
+<!-- INDICES -->
 
 <section class="market-indices">
 
@@ -345,11 +341,7 @@ Live Market Indices
 <div class="indices-grid" id="indicesContainer">
 
 <div class="index-card">
-
-<div class="index-name">
 Loading...
-</div>
-
 </div>
 
 </div>
@@ -359,7 +351,7 @@ Loading...
 <!-- SEARCH -->
 
 <h2 class="section-title">
-Nifty 50 Stocks
+Nifty Stocks Screener
 </h2>
 
 <div class="search-box">
@@ -373,13 +365,35 @@ onkeyup="searchStocks()"
 
 </div>
 
-<!-- STOCKS -->
+<!-- TABLE -->
 
-<div id="stockGrid" class="stock-grid">
+<div class="table-wrapper">
 
-<div class="stock-card">
-Loading stocks...
-</div>
+<table class="stock-table">
+
+<thead>
+
+<tr>
+<th>Stock</th>
+<th>Price</th>
+<th>Change %</th>
+<th>52W High</th>
+<th>52W Low</th>
+</tr>
+
+</thead>
+
+<tbody id="stockTableBody">
+
+<tr>
+<td colspan="5">
+Loading Stocks...
+</td>
+</tr>
+
+</tbody>
+
+</table>
 
 </div>
 
@@ -423,26 +437,22 @@ Loading...
 
 <script>
 
-/* =========================
-   GOOGLE SHEETS CSV URLS
-========================= */
+/* URLS */
 
 const STOCKS_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=0&single=true&output=csv";
 
-const INDICES_CSV_URL =
+const INDICES_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=1647598626&single=true&output=csv";
 
-/* =========================
-   LOAD INDICES
-========================= */
+/* LOAD INDICES */
 
 async function loadIndices(){
 
 try{
 
 const response =
-await fetch(`${INDICES_CSV_URL}&t=${Date.now()}`);
+await fetch(`${INDICES_URL}&t=${Date.now()}`);
 
 const csv =
 await response.text();
@@ -457,19 +467,13 @@ container.innerHTML = "";
 
 rows.forEach(row => {
 
-const cols =
-row.split(",");
+const cols = row.split(",");
 
 if(cols.length < 3) return;
 
-const name =
-cols[0].replace(/"/g,"");
-
-const price =
-cols[1].replace(/"/g,"");
-
-const change =
-cols[2].replace(/"/g,"");
+const name = cols[0];
+const price = cols[1];
+const change = cols[2];
 
 const positive =
 !change.includes("-");
@@ -500,27 +504,13 @@ ${positive ? "▲":"▼"} ${change}
 
 }catch(error){
 
-console.log("Indices Error:", error);
-
-document.getElementById("indicesContainer").innerHTML = `
-
-<div class="index-card">
-
-<div class="index-name">
-Unable To Load Indices
-</div>
-
-</div>
-
-`;
+console.log("Indices Error:",error);
 
 }
 
 }
 
-/* =========================
-   LOAD STOCKS
-========================= */
+/* LOAD STOCKS */
 
 async function loadStocks(){
 
@@ -535,68 +525,49 @@ await response.text();
 const rows =
 csv.trim().split("\n").slice(1);
 
-const grid =
-document.getElementById("stockGrid");
+const tbody =
+document.getElementById("stockTableBody");
 
-grid.innerHTML = "";
+tbody.innerHTML = "";
 
 let stocks = [];
 
 rows.forEach(row => {
 
-const cols =
-row.split(",");
+const cols = row.split(",");
 
 if(cols.length < 5) return;
 
 stocks.push(cols);
 
-const stock =
-cols[0].replace(/"/g,"");
-
-const price =
-cols[1].replace(/"/g,"");
-
-const high =
-cols[2].replace(/"/g,"");
-
-const low =
-cols[3].replace(/"/g,"");
-
-const change =
-cols[4].replace(/"/g,"");
+const stock = cols[0];
+const price = cols[1];
+const high = cols[2];
+const low = cols[3];
+const change = cols[4];
 
 const positive =
 !change.includes("-");
 
-grid.innerHTML += `
+tbody.innerHTML += `
 
-<div class="stock-card">
+<tr>
 
-<div class="stock-top">
+<td>${stock}</td>
 
-<div class="stock-name">
-${stock}
-</div>
+<td>₹${Number(price).toLocaleString("en-IN")}</td>
 
-<div class="${positive ? "positive":"negative"}">
+<td class="${positive ? "positive":"negative"}">
+
 ${positive ? "▲":"▼"} ${change}%
-</div>
 
-</div>
+</td>
 
-<div class="stock-price">
-₹${Number(price).toLocaleString("en-IN")}
-</div>
+<td>${high}</td>
 
-<div class="stock-details">
+<td>${low}</td>
 
-52W High: ${high}<br>
-52W Low: ${low}
-
-</div>
-
-</div>
+</tr>
 
 `;
 
@@ -606,15 +577,13 @@ loadMovers(stocks);
 
 }catch(error){
 
-console.log("Stocks Error:", error);
+console.log("Stocks Error:",error);
 
 }
 
 }
 
-/* =========================
-   SEARCH STOCKS
-========================= */
+/* SEARCH */
 
 function searchStocks(){
 
@@ -623,21 +592,21 @@ document.getElementById("searchInput")
 .value
 .toUpperCase();
 
-let cards =
-document.querySelectorAll(".stock-card");
+let rows =
+document.querySelectorAll("#stockTableBody tr");
 
-cards.forEach(card => {
+rows.forEach(row => {
 
 let text =
-card.innerText;
+row.innerText;
 
 if(text.toUpperCase().indexOf(input) > -1){
 
-card.style.display = "";
+row.style.display = "";
 
 }else{
 
-card.style.display = "none";
+row.style.display = "none";
 
 }
 
@@ -645,9 +614,7 @@ card.style.display = "none";
 
 }
 
-/* =========================
-   TOP MOVERS
-========================= */
+/* TOP MOVERS */
 
 function loadMovers(stocks){
 
@@ -678,7 +645,7 @@ ${stock[4]}%
 `).join("");
 
 document.getElementById("losers").innerHTML =
-losers.map(stock => `
+losers.reverse().map(stock => `
 
 <div class="mover-item">
 
@@ -694,9 +661,7 @@ ${stock[4]}%
 
 }
 
-/* =========================
-   AUTO LOAD
-========================= */
+/* AUTO LOAD */
 
 loadIndices();
 loadStocks();
