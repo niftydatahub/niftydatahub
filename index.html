@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,22 +10,6 @@
 
 <style>
 
-:root{
---bg:#050505;
---card:#111;
---text:#fff;
---border:#222;
---primary:#00d9ff;
-}
-
-.light-mode{
---bg:#f4f4f4;
---card:#fff;
---text:#111;
---border:#ddd;
---primary:#0066ff;
-}
-
 *{
 margin:0;
 padding:0;
@@ -34,225 +18,260 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:var(--bg);
-color:var(--text);
+background:#050505;
+color:white;
 overflow-x:hidden;
 transition:.3s;
 }
 
-/* HEADER */
+body.light{
+background:#f5f5f5;
+color:#111;
+}
 
 header{
 position:sticky;
 top:0;
 z-index:1000;
-background:var(--card);
+background:#0d0d0d;
 padding:18px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-border-bottom:2px solid var(--primary);
+border-bottom:2px solid #00d9ff;
+}
+
+body.light header{
+background:white;
 }
 
 .logo{
-font-size:30px;
+font-size:32px;
 font-weight:bold;
-color:var(--primary);
+color:#00d9ff;
 }
 
 .header-right{
 display:flex;
-gap:15px;
 align-items:center;
+gap:15px;
 }
 
 .theme-btn{
 padding:10px 16px;
 border:none;
 border-radius:10px;
-background:var(--primary);
-color:#000;
+background:#00d9ff;
+color:black;
 font-weight:bold;
 cursor:pointer;
 }
 
-/* HERO */
+.market-status{
+background:#101010;
+padding:10px;
+text-align:center;
+font-size:14px;
+color:#00ff88;
+border-bottom:1px solid #222;
+}
 
 .hero{
-padding:70px 20px;
+padding:80px 20px;
 text-align:center;
 }
 
 .hero h1{
-font-size:52px;
-margin-bottom:18px;
+font-size:60px;
+margin-bottom:20px;
 }
 
 .hero p{
-font-size:18px;
+font-size:20px;
 color:#888;
-margin-bottom:30px;
 }
-
-/* TITLES */
 
 .section-title{
-font-size:32px;
+font-size:42px;
 text-align:center;
-margin:50px 0 25px;
-color:var(--primary);
+margin:60px 0 30px;
+color:#00d9ff;
 }
 
-/* INDICES */
-
-.indices-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:16px;
+.market-indices{
 padding:20px;
 }
 
+.indices-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+
 .index-card{
-background:var(--card);
-padding:18px;
-border-radius:16px;
-border:1px solid var(--border);
+background:#111;
+padding:25px;
+border-radius:18px;
+border:1px solid #222;
 }
 
 .index-name{
-color:var(--primary);
-font-size:15px;
+color:#00d9ff;
+font-size:18px;
 font-weight:bold;
 margin-bottom:10px;
 }
 
 .index-price{
-font-size:28px;
+font-size:40px;
 font-weight:bold;
-margin-bottom:10px;
+}
+
+.index-change{
+margin-top:10px;
+font-size:18px;
+font-weight:bold;
 }
 
 .positive{
-color:#00cc66;
+color:#00ff88;
 }
 
 .negative{
 color:#ff4d4d;
 }
 
-/* CONTROLS */
+.heatmap{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:10px;
+}
 
-.controls{
+.heat-card{
+padding:18px;
+border-radius:12px;
+text-align:center;
+font-weight:bold;
+color:white;
+}
+
+.search-sort{
 display:flex;
 gap:15px;
 padding:20px;
 flex-wrap:wrap;
 }
 
-.controls input,
-.controls select{
-padding:14px;
+.search-sort input,
+.search-sort select{
+padding:15px;
 border-radius:10px;
-border:1px solid var(--border);
-background:var(--card);
-color:var(--text);
+border:1px solid #222;
+background:#111;
+color:white;
+font-size:15px;
 }
-
-/* STOCK GRID */
 
 .stock-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:16px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
 padding:20px;
 }
 
 .stock-card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:16px;
-padding:16px;
+background:#111;
+padding:20px;
+border-radius:18px;
+border:1px solid #222;
+cursor:pointer;
 transition:.3s;
 position:relative;
 }
 
 .stock-card:hover{
-transform:translateY(-4px);
-border-color:var(--primary);
-}
-
-.watchlist-btn{
-position:absolute;
-top:12px;
-right:12px;
-cursor:pointer;
-font-size:18px;
+transform:translateY(-5px);
+border-color:#00d9ff;
 }
 
 .stock-name{
-font-size:15px;
+font-size:20px;
 font-weight:bold;
-margin-bottom:8px;
-cursor:pointer;
 }
 
 .stock-price{
-font-size:22px;
+font-size:36px;
 font-weight:bold;
 margin:10px 0;
 }
 
-.stock-details{
-font-size:12px;
-line-height:1.7;
-color:#999;
-}
-
-.stock-chart{
-height:40px;
-margin-top:12px;
-overflow:hidden;
-border-radius:10px;
-}
-
-/* HEATMAP */
-
-.heatmap{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:10px;
-padding:20px;
-}
-
-.heat-tile{
-padding:20px;
-border-radius:14px;
-text-align:center;
+.stock-change{
+font-size:18px;
 font-weight:bold;
-color:white;
+margin-bottom:12px;
 }
 
-/* MODAL */
+.stock-details{
+font-size:14px;
+line-height:1.8;
+color:#aaa;
+}
+
+.watch-btn{
+position:absolute;
+top:15px;
+right:15px;
+background:none;
+border:none;
+color:white;
+font-size:22px;
+cursor:pointer;
+}
+
+.mini-chart{
+width:100%;
+height:80px;
+margin-top:15px;
+border-radius:10px;
+overflow:hidden;
+}
+
+.mini-chart iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.watchlist-section{
+padding:20px;
+}
+
+.watchlist-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:15px;
+}
 
 .modal{
-display:none;
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,.8);
-z-index:9999;
+background:rgba(0,0,0,0.9);
+display:none;
 justify-content:center;
 align-items:center;
 padding:20px;
+z-index:9999;
 }
 
 .modal-content{
-background:#111;
 width:100%;
-max-width:1000px;
-height:600px;
+max-width:1200px;
+height:90vh;
+background:#0b0b0b;
 border-radius:20px;
 overflow:hidden;
 position:relative;
@@ -262,32 +281,43 @@ position:relative;
 position:absolute;
 top:15px;
 right:20px;
-font-size:28px;
-cursor:pointer;
+font-size:35px;
 color:white;
+cursor:pointer;
 z-index:10;
 }
 
-/* FOOTER */
-
-footer{
-margin-top:50px;
-padding:35px;
-text-align:center;
-border-top:2px solid var(--primary);
-background:var(--card);
+#largeChart{
+width:100%;
+height:100%;
+border:none;
 }
 
-/* MOBILE */
+footer{
+margin-top:70px;
+padding:40px;
+text-align:center;
+background:#0d0d0d;
+border-top:2px solid #00d9ff;
+color:#777;
+}
 
 @media(max-width:768px){
 
 .hero h1{
-font-size:36px;
+font-size:42px;
 }
 
-.stock-grid{
-grid-template-columns:repeat(2,1fr);
+.section-title{
+font-size:34px;
+}
+
+.stock-price{
+font-size:30px;
+}
+
+.index-price{
+font-size:32px;
 }
 
 }
@@ -307,14 +337,16 @@ NiftyDataHub Pro
 <div class="header-right">
 
 <button class="theme-btn" onclick="toggleTheme()">
-🌙 Theme
+🌓 Theme
 </button>
 
 </div>
 
 </header>
 
-<!-- HERO -->
+<div class="market-status">
+🟢 MARKET OPEN • LIVE DELAYED DATA • AUTO REFRESH EVERY 60 SECONDS
+</div>
 
 <section class="hero">
 
@@ -328,7 +360,7 @@ Professional Real-Time Analytics Platform
 
 </section>
 
-<!-- INDICES -->
+<section class="market-indices">
 
 <h2 class="section-title">
 Live Market Indices
@@ -338,7 +370,7 @@ Live Market Indices
 Loading...
 </div>
 
-<!-- HEATMAP -->
+</section>
 
 <h2 class="section-title">
 Market Heatmap
@@ -348,13 +380,11 @@ Market Heatmap
 Loading...
 </div>
 
-<!-- CONTROLS -->
-
 <h2 class="section-title">
 Market Tiles
 </h2>
 
-<div class="controls">
+<div class="search-sort">
 
 <input
 type="text"
@@ -364,38 +394,30 @@ onkeyup="searchStocks()"
 >
 
 <select id="sortSelect" onchange="sortStocks()">
-
-<option value="default">
-Sort By
-</option>
-
-<option value="gainers">
-Top Gainers
-</option>
-
-<option value="losers">
-Top Losers
-</option>
-
-<option value="volume">
-Highest Volume
-</option>
-
-<option value="marketcap">
-Largest Market Cap
-</option>
-
+<option value="">Sort By</option>
+<option value="priceHigh">Price High</option>
+<option value="priceLow">Price Low</option>
+<option value="changeHigh">Top Gainers</option>
+<option value="changeLow">Top Losers</option>
 </select>
 
 </div>
 
-<!-- STOCK GRID -->
-
-<div class="stock-grid" id="stockGrid">
+<div id="stockGrid" class="stock-grid">
 Loading...
 </div>
 
-<!-- CHART MODAL -->
+<h2 class="section-title">
+Watchlist
+</h2>
+
+<section class="watchlist-section">
+
+<div id="watchlist" class="watchlist-grid">
+No Watchlist Yet
+</div>
+
+</section>
 
 <div class="modal" id="chartModal">
 
@@ -405,18 +427,11 @@ Loading...
 ×
 </div>
 
-<iframe
-id="largeChart"
-width="100%"
-height="100%"
-frameborder="0">
-</iframe>
+<iframe id="largeChart"></iframe>
 
 </div>
 
 </div>
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -426,8 +441,6 @@ frameborder="0">
 
 <script>
 
-/* URLS */
-
 const STOCKS_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=0&single=true&output=csv";
 
@@ -435,12 +448,10 @@ const INDICES_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=1647598626&single=true&output=csv";
 
 let allStocks = [];
-let watchlist =
-JSON.parse(localStorage.getItem("watchlist")) || [];
-
-/* LOAD INDICES */
 
 async function loadIndices(){
+
+try{
 
 const response =
 await fetch(`${INDICES_URL}&t=${Date.now()}`);
@@ -460,23 +471,29 @@ rows.forEach(row=>{
 
 const cols = row.split(",");
 
+const name = cols[0];
+const price = cols[1];
+const change = cols[2];
+
 const positive =
-!cols[2].includes("-");
+!change.includes("-");
 
 container.innerHTML += `
 
 <div class="index-card">
 
 <div class="index-name">
-${cols[0]}
+${name}
 </div>
 
 <div class="index-price">
-${cols[1]}
+${Number(price).toLocaleString("en-IN")}
 </div>
 
-<div class="${positive ? "positive":"negative"}">
-${positive ? "▲":"▼"} ${cols[2]}
+<div class="index-change ${positive ? "positive":"negative"}">
+
+${positive ? "▲":"▼"} ${change}
+
 </div>
 
 </div>
@@ -485,9 +502,13 @@ ${positive ? "▲":"▼"} ${cols[2]}
 
 });
 
+}catch(err){
+
+console.log(err);
+
 }
 
-/* LOAD STOCKS */
+}
 
 async function loadStocks(){
 
@@ -497,8 +518,10 @@ await fetch(`${STOCKS_URL}&t=${Date.now()}`);
 const csv =
 await response.text();
 
-allStocks =
+const rows =
 csv.trim().split("\n").slice(1);
+
+allStocks = rows.map(row=>row.split(","));
 
 renderStocks(allStocks);
 
@@ -506,18 +529,14 @@ renderHeatmap(allStocks);
 
 }
 
-/* RENDER STOCKS */
-
-function renderStocks(stocks){
+function renderStocks(data){
 
 const grid =
 document.getElementById("stockGrid");
 
 grid.innerHTML = "";
 
-stocks.forEach(row=>{
-
-const cols = row.split(",");
+data.forEach(cols=>{
 
 if(cols.length < 9) return;
 
@@ -534,34 +553,39 @@ const marketCap = cols[8];
 const positive =
 !change.includes("-");
 
-const saved =
-watchlist.includes(stock);
-
 grid.innerHTML += `
 
-<div class="stock-card">
+<div class="stock-card"
 
-<div class="watchlist-btn"
-onclick="toggleWatchlist('${stock}')">
+onclick="openChart(
+'${stock}',
+'${price}',
+'${change}',
+'${dayHigh}',
+'${dayLow}',
+'${high52}',
+'${low52}',
+'${volume}',
+'${marketCap}'
+)"
 
-${saved ? "⭐":"☆"}
+>
 
-</div>
+<button class="watch-btn"
 
-<div class="stock-name"
-onclick="openChart('${stock}')">
+onclick="event.stopPropagation();addWatchlist('${stock}')">
 
+☆</button>
+
+<div class="stock-name">
 ${stock}
-
 </div>
 
 <div class="stock-price">
-
 ₹${Number(price).toLocaleString("en-IN")}
-
 </div>
 
-<div class="${positive ? "positive":"negative"}">
+<div class="stock-change ${positive ? "positive":"negative"}">
 
 ${positive ? "▲":"▼"} ${change}%
 
@@ -571,24 +595,18 @@ ${positive ? "▲":"▼"} ${change}%
 
 Day H: ${dayHigh}<br>
 Day L: ${dayLow}<br>
-
 52W H: ${high52}<br>
 52W L: ${low52}<br>
-
 Vol: ${Number(volume).toLocaleString("en-IN")}<br>
-
-MCap: ₹${marketCap}
+MCap: ₹${Number(marketCap).toLocaleString("en-IN")}
 
 </div>
 
-<div class="stock-chart">
+<div class="mini-chart">
 
 <iframe
-src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=1&locale=en"
-width="100%"
-height="40"
-frameborder="0"
-scrolling="no">
+src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=3&hide_top_toolbar=1&hide_legend=1&save_image=0"
+>
 </iframe>
 
 </div>
@@ -601,136 +619,29 @@ scrolling="no">
 
 }
 
-/* SEARCH */
-
-function searchStocks(){
-
-let input =
-document.getElementById("searchInput")
-.value
-.toUpperCase();
-
-let filtered =
-allStocks.filter(row =>
-row.toUpperCase().includes(input)
-);
-
-renderStocks(filtered);
-
-}
-
-/* SORTING */
-
-function sortStocks(){
-
-const type =
-document.getElementById("sortSelect").value;
-
-let sorted = [...allStocks];
-
-if(type==="gainers"){
-
-sorted.sort((a,b)=>
-parseFloat(b.split(",")[4]) -
-parseFloat(a.split(",")[4])
-);
-
-}
-
-if(type==="losers"){
-
-sorted.sort((a,b)=>
-parseFloat(a.split(",")[4]) -
-parseFloat(b.split(",")[4])
-);
-
-}
-
-if(type==="volume"){
-
-sorted.sort((a,b)=>
-parseFloat(b.split(",")[7]) -
-parseFloat(a.split(",")[7])
-);
-
-}
-
-renderStocks(sorted);
-
-}
-
-/* WATCHLIST */
-
-function toggleWatchlist(stock){
-
-if(watchlist.includes(stock)){
-
-watchlist =
-watchlist.filter(s=>s!==stock);
-
-}else{
-
-watchlist.push(stock);
-
-}
-
-localStorage.setItem(
-"watchlist",
-JSON.stringify(watchlist)
-);
-
-renderStocks(allStocks);
-
-}
-
-/* LARGE CHART */
-
-function openChart(stock){
-
-document.getElementById("chartModal")
-.style.display = "flex";
-
-document.getElementById("largeChart")
-.src =
-`https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark`;
-
-}
-
-function closeChart(){
-
-document.getElementById("chartModal")
-.style.display = "none";
-
-}
-
-/* HEATMAP */
-
-function renderHeatmap(stocks){
+function renderHeatmap(data){
 
 const heatmap =
 document.getElementById("heatmap");
 
 heatmap.innerHTML = "";
 
-stocks.slice(0,20).forEach(row=>{
-
-const cols = row.split(",");
+data.slice(0,20).forEach(cols=>{
 
 const stock = cols[0];
 const change = parseFloat(cols[4]);
 
-const color =
+const bg =
 change >= 0
 ? "#00aa55"
 : "#cc3333";
 
 heatmap.innerHTML += `
 
-<div class="heat-tile"
-style="background:${color}">
+<div class="heat-card"
+style="background:${bg}">
 
 ${stock}<br>
-
 ${change}%
 
 </div>
@@ -741,15 +652,250 @@ ${change}%
 
 }
 
-/* THEME */
+function searchStocks(){
 
-function toggleTheme(){
+const input =
+document.getElementById("searchInput")
+.value
+.toUpperCase();
 
-document.body.classList.toggle("light-mode");
+const filtered =
+allStocks.filter(stock=>
+
+stock[0].toUpperCase().includes(input)
+
+);
+
+renderStocks(filtered);
 
 }
 
-/* AUTO LOAD */
+function sortStocks(){
+
+const value =
+document.getElementById("sortSelect").value;
+
+let sorted = [...allStocks];
+
+if(value === "priceHigh"){
+
+sorted.sort((a,b)=>
+parseFloat(b[1]) - parseFloat(a[1])
+);
+
+}
+
+if(value === "priceLow"){
+
+sorted.sort((a,b)=>
+parseFloat(a[1]) - parseFloat(b[1])
+);
+
+}
+
+if(value === "changeHigh"){
+
+sorted.sort((a,b)=>
+parseFloat(b[4]) - parseFloat(a[4])
+);
+
+}
+
+if(value === "changeLow"){
+
+sorted.sort((a,b)=>
+parseFloat(a[4]) - parseFloat(b[4])
+);
+
+}
+
+renderStocks(sorted);
+
+}
+
+function addWatchlist(stock){
+
+const watchlist =
+document.getElementById("watchlist");
+
+if(watchlist.innerHTML.includes(stock))
+return;
+
+watchlist.innerHTML += `
+
+<div class="stock-card">
+
+<div class="stock-name">
+${stock}
+</div>
+
+</div>
+
+`;
+
+}
+
+function openChart(stock,price,change,dayHigh,dayLow,high52,low52,volume,mcap){
+
+document.getElementById("chartModal").style.display = "flex";
+
+const positive = !change.includes("-");
+
+document.getElementById("largeChart").srcdoc = `
+
+<html>
+
+<head>
+
+<style>
+
+body{
+margin:0;
+background:#0b0b0b;
+color:white;
+font-family:Arial;
+padding:20px;
+}
+
+.stock-name{
+font-size:38px;
+font-weight:bold;
+}
+
+.stock-price{
+font-size:34px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.green{
+color:#00cc66;
+}
+
+.red{
+color:#ff4d4d;
+}
+
+.details{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-top:25px;
+}
+
+.box{
+background:#111;
+padding:18px;
+border-radius:14px;
+}
+
+.label{
+font-size:13px;
+color:#888;
+margin-bottom:8px;
+}
+
+.value{
+font-size:22px;
+font-weight:bold;
+}
+
+.chart{
+margin-top:25px;
+height:500px;
+border-radius:18px;
+overflow:hidden;
+}
+
+iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stock-name">
+${stock}
+</div>
+
+<div class="stock-price">
+₹${price}
+</div>
+
+<div class="${positive ? "green":"red"}">
+
+${positive ? "▲":"▼"} ${change}%
+
+</div>
+
+<div class="details">
+
+<div class="box">
+<div class="label">Day High</div>
+<div class="value">${dayHigh}</div>
+</div>
+
+<div class="box">
+<div class="label">Day Low</div>
+<div class="value">${dayLow}</div>
+</div>
+
+<div class="box">
+<div class="label">52W High</div>
+<div class="value">${high52}</div>
+</div>
+
+<div class="box">
+<div class="label">52W Low</div>
+<div class="value">${low52}</div>
+</div>
+
+<div class="box">
+<div class="label">Volume</div>
+<div class="value">${volume}</div>
+</div>
+
+<div class="box">
+<div class="label">Market Cap</div>
+<div class="value">${mcap}</div>
+</div>
+
+</div>
+
+<div class="chart">
+
+<iframe
+src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=1"
+>
+</iframe>
+
+</div>
+
+</body>
+
+</html>
+
+`;
+
+}
+
+function closeChart(){
+
+document.getElementById("chartModal")
+.style.display = "none";
+
+}
+
+function toggleTheme(){
+
+document.body.classList.toggle("light");
+
+}
 
 loadIndices();
 loadStocks();
