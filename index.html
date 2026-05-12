@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,12 +21,6 @@ body{
 background:#050505;
 color:white;
 overflow-x:hidden;
-transition:.3s;
-}
-
-body.light{
-background:#f5f5f5;
-color:#111;
 }
 
 header{
@@ -41,20 +35,10 @@ align-items:center;
 border-bottom:2px solid #00d9ff;
 }
 
-body.light header{
-background:white;
-}
-
 .logo{
 font-size:32px;
 font-weight:bold;
 color:#00d9ff;
-}
-
-.header-right{
-display:flex;
-align-items:center;
-gap:15px;
 }
 
 .theme-btn{
@@ -82,7 +66,7 @@ text-align:center;
 }
 
 .hero h1{
-font-size:60px;
+font-size:55px;
 margin-bottom:20px;
 }
 
@@ -92,20 +76,17 @@ color:#888;
 }
 
 .section-title{
-font-size:42px;
+font-size:40px;
 text-align:center;
 margin:60px 0 30px;
 color:#00d9ff;
-}
-
-.market-indices{
-padding:20px;
 }
 
 .indices-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:18px;
+padding:20px;
 }
 
 .index-card{
@@ -123,7 +104,7 @@ margin-bottom:10px;
 }
 
 .index-price{
-font-size:40px;
+font-size:38px;
 font-weight:bold;
 }
 
@@ -142,10 +123,10 @@ color:#ff4d4d;
 }
 
 .heatmap{
-padding:20px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
 gap:10px;
+padding:20px;
 }
 
 .heat-card{
@@ -201,7 +182,7 @@ font-weight:bold;
 }
 
 .stock-price{
-font-size:36px;
+font-size:34px;
 font-weight:bold;
 margin:10px 0;
 }
@@ -229,28 +210,14 @@ font-size:22px;
 cursor:pointer;
 }
 
-.mini-chart{
-width:100%;
-height:80px;
+.tap-chart{
 margin-top:15px;
+padding:12px;
+background:#151515;
 border-radius:10px;
-overflow:hidden;
-}
-
-.mini-chart iframe{
-width:100%;
-height:100%;
-border:none;
-}
-
-.watchlist-section{
-padding:20px;
-}
-
-.watchlist-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:15px;
+text-align:center;
+font-size:13px;
+color:#888;
 }
 
 .modal{
@@ -259,18 +226,18 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.9);
+background:rgba(0,0,0,0.95);
 display:none;
 justify-content:center;
 align-items:center;
-padding:20px;
+padding:15px;
 z-index:9999;
 }
 
 .modal-content{
 width:100%;
 max-width:1200px;
-height:90vh;
+height:95vh;
 background:#0b0b0b;
 border-radius:20px;
 overflow:hidden;
@@ -279,12 +246,12 @@ position:relative;
 
 .close-btn{
 position:absolute;
-top:15px;
+top:10px;
 right:20px;
-font-size:35px;
+font-size:40px;
 color:white;
 cursor:pointer;
-z-index:10;
+z-index:100;
 }
 
 #largeChart{
@@ -309,15 +276,15 @@ font-size:42px;
 }
 
 .section-title{
-font-size:34px;
+font-size:32px;
 }
 
 .stock-price{
-font-size:30px;
+font-size:28px;
 }
 
 .index-price{
-font-size:32px;
+font-size:30px;
 }
 
 }
@@ -334,13 +301,9 @@ font-size:32px;
 NiftyDataHub Pro
 </div>
 
-<div class="header-right">
-
 <button class="theme-btn" onclick="toggleTheme()">
 🌓 Theme
 </button>
-
-</div>
 
 </header>
 
@@ -360,8 +323,6 @@ Professional Real-Time Analytics Platform
 
 </section>
 
-<section class="market-indices">
-
 <h2 class="section-title">
 Live Market Indices
 </h2>
@@ -369,8 +330,6 @@ Live Market Indices
 <div class="indices-grid" id="indicesContainer">
 Loading...
 </div>
-
-</section>
 
 <h2 class="section-title">
 Market Heatmap
@@ -394,11 +353,13 @@ onkeyup="searchStocks()"
 >
 
 <select id="sortSelect" onchange="sortStocks()">
+
 <option value="">Sort By</option>
 <option value="priceHigh">Price High</option>
 <option value="priceLow">Price Low</option>
 <option value="changeHigh">Top Gainers</option>
 <option value="changeLow">Top Losers</option>
+
 </select>
 
 </div>
@@ -406,18 +367,6 @@ onkeyup="searchStocks()"
 <div id="stockGrid" class="stock-grid">
 Loading...
 </div>
-
-<h2 class="section-title">
-Watchlist
-</h2>
-
-<section class="watchlist-section">
-
-<div id="watchlist" class="watchlist-grid">
-No Watchlist Yet
-</div>
-
-</section>
 
 <div class="modal" id="chartModal">
 
@@ -450,8 +399,6 @@ const INDICES_URL =
 let allStocks = [];
 
 async function loadIndices(){
-
-try{
 
 const response =
 await fetch(`${INDICES_URL}&t=${Date.now()}`);
@@ -501,12 +448,6 @@ ${positive ? "▲":"▼"} ${change}
 `;
 
 });
-
-}catch(err){
-
-console.log(err);
-
-}
 
 }
 
@@ -571,9 +512,7 @@ onclick="openChart(
 
 >
 
-<button class="watch-btn"
-
-onclick="event.stopPropagation();addWatchlist('${stock}')">
+<button class="watch-btn">
 
 ☆</button>
 
@@ -602,12 +541,9 @@ MCap: ₹${Number(marketCap).toLocaleString("en-IN")}
 
 </div>
 
-<div class="mini-chart">
+<div class="tap-chart">
 
-<iframe
-src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=3&hide_top_toolbar=1&hide_legend=1&save_image=0"
->
-</iframe>
+Tap Card For Full Chart 📈
 
 </div>
 
@@ -710,28 +646,6 @@ parseFloat(a[4]) - parseFloat(b[4])
 }
 
 renderStocks(sorted);
-
-}
-
-function addWatchlist(stock){
-
-const watchlist =
-document.getElementById("watchlist");
-
-if(watchlist.innerHTML.includes(stock))
-return;
-
-watchlist.innerHTML += `
-
-<div class="stock-card">
-
-<div class="stock-name">
-${stock}
-</div>
-
-</div>
-
-`;
 
 }
 
@@ -870,8 +784,7 @@ ${positive ? "▲":"▼"} ${change}%
 <div class="chart">
 
 <iframe
-src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=1"
->
+src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=1">
 </iframe>
 
 </div>
