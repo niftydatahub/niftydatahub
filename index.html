@@ -6,9 +6,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NiftyDataHub</title>
+<title>NiftyDataHub Pro</title>
 
 <style>
+
+:root{
+--bg:#050505;
+--card:#111;
+--text:#fff;
+--border:#222;
+--primary:#00d9ff;
+}
+
+.light-mode{
+--bg:#f4f4f4;
+--card:#fff;
+--text:#111;
+--border:#ddd;
+--primary:#0066ff;
+}
 
 *{
 margin:0;
@@ -18,9 +34,10 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#050505;
-color:white;
+background:var(--bg);
+color:var(--text);
 overflow-x:hidden;
+transition:.3s;
 }
 
 /* HEADER */
@@ -29,45 +46,34 @@ header{
 position:sticky;
 top:0;
 z-index:1000;
-background:#0d0d0d;
+background:var(--card);
 padding:18px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-border-bottom:2px solid #00d9ff;
+border-bottom:2px solid var(--primary);
 }
 
 .logo{
 font-size:30px;
 font-weight:bold;
-color:#00d9ff;
+color:var(--primary);
 }
 
-nav{
+.header-right{
 display:flex;
-gap:20px;
+gap:15px;
+align-items:center;
 }
 
-nav a{
-text-decoration:none;
-color:white;
-font-size:15px;
-transition:.3s;
-}
-
-nav a:hover{
-color:#00d9ff;
-}
-
-/* MARKET STATUS */
-
-.market-status{
-background:#101010;
-padding:10px;
-text-align:center;
-font-size:14px;
-color:#00ff88;
-border-bottom:1px solid #222;
+.theme-btn{
+padding:10px 16px;
+border:none;
+border-radius:10px;
+background:var(--primary);
+color:#000;
+font-weight:bold;
+cursor:pointer;
 }
 
 /* HERO */
@@ -84,62 +90,37 @@ margin-bottom:18px;
 
 .hero p{
 font-size:18px;
-color:#999;
+color:#888;
 margin-bottom:30px;
-}
-
-.hero-btn{
-display:inline-block;
-padding:14px 30px;
-background:#00d9ff;
-color:black;
-font-weight:bold;
-text-decoration:none;
-border-radius:12px;
-transition:.3s;
-}
-
-.hero-btn:hover{
-transform:scale(1.05);
 }
 
 /* TITLES */
 
 .section-title{
-font-size:34px;
+font-size:32px;
 text-align:center;
 margin:50px 0 25px;
-color:#00d9ff;
+color:var(--primary);
 }
 
-/* LIVE INDICES */
-
-.market-indices{
-padding:20px;
-}
+/* INDICES */
 
 .indices-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:16px;
+padding:20px;
 }
 
 .index-card{
-background:#111;
+background:var(--card);
 padding:18px;
 border-radius:16px;
-border:1px solid #222;
-transition:.3s;
-}
-
-.index-card:hover{
-transform:translateY(-4px);
-border-color:#00d9ff;
-box-shadow:0 0 15px rgba(0,217,255,0.15);
+border:1px solid var(--border);
 }
 
 .index-name{
-color:#00d9ff;
+color:var(--primary);
 font-size:15px;
 font-weight:bold;
 margin-bottom:10px;
@@ -151,66 +132,68 @@ font-weight:bold;
 margin-bottom:10px;
 }
 
-.index-change{
-font-size:15px;
-font-weight:bold;
-}
-
-/* COLORS */
-
 .positive{
-color:#00ff88;
+color:#00cc66;
 }
 
 .negative{
 color:#ff4d4d;
 }
 
-/* SEARCH */
+/* CONTROLS */
 
-.search-box{
+.controls{
+display:flex;
+gap:15px;
 padding:20px;
+flex-wrap:wrap;
 }
 
-#searchInput{
-width:100%;
-padding:15px;
-background:#111;
-border:1px solid #222;
-border-radius:12px;
-color:white;
-font-size:15px;
-outline:none;
+.controls input,
+.controls select{
+padding:14px;
+border-radius:10px;
+border:1px solid var(--border);
+background:var(--card);
+color:var(--text);
 }
 
 /* STOCK GRID */
 
 .stock-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-gap:14px;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:16px;
 padding:20px;
 }
 
 .stock-card{
-background:#111;
-padding:16px;
+background:var(--card);
+border:1px solid var(--border);
 border-radius:16px;
-border:1px solid #222;
+padding:16px;
 transition:.3s;
-min-height:250px;
+position:relative;
 }
 
 .stock-card:hover{
 transform:translateY(-4px);
-border-color:#00d9ff;
-box-shadow:0 0 15px rgba(0,217,255,0.15);
+border-color:var(--primary);
+}
+
+.watchlist-btn{
+position:absolute;
+top:12px;
+right:12px;
+cursor:pointer;
+font-size:18px;
 }
 
 .stock-name{
 font-size:15px;
 font-weight:bold;
 margin-bottom:8px;
+cursor:pointer;
 }
 
 .stock-price{
@@ -219,66 +202,80 @@ font-weight:bold;
 margin:10px 0;
 }
 
-.stock-change{
-font-size:14px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
 .stock-details{
 font-size:12px;
-color:#aaa;
 line-height:1.7;
-margin-top:8px;
+color:#999;
 }
-
-/* MINI CHART PLACEHOLDER */
 
 .stock-chart{
 height:40px;
 margin-top:12px;
+overflow:hidden;
 border-radius:10px;
-background:linear-gradient(90deg,#00ff88,#00d9ff);
-opacity:0.2;
 }
 
-/* TOP MOVERS */
+/* HEATMAP */
 
-.movers{
+.heatmap{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:18px;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:10px;
 padding:20px;
 }
 
-.mover-card{
+.heat-tile{
+padding:20px;
+border-radius:14px;
+text-align:center;
+font-weight:bold;
+color:white;
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+z-index:9999;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.modal-content{
 background:#111;
-padding:22px;
-border-radius:16px;
-border:1px solid #222;
+width:100%;
+max-width:1000px;
+height:600px;
+border-radius:20px;
+overflow:hidden;
+position:relative;
 }
 
-.mover-card h3{
-font-size:24px;
-margin-bottom:18px;
-color:#00d9ff;
-}
-
-.mover-item{
-display:flex;
-justify-content:space-between;
-margin-bottom:14px;
+.close-btn{
+position:absolute;
+top:15px;
+right:20px;
+font-size:28px;
+cursor:pointer;
+color:white;
+z-index:10;
 }
 
 /* FOOTER */
 
 footer{
-margin-top:60px;
+margin-top:50px;
 padding:35px;
 text-align:center;
-background:#0d0d0d;
-border-top:2px solid #00d9ff;
-color:#777;
+border-top:2px solid var(--primary);
+background:var(--card);
 }
 
 /* MOBILE */
@@ -289,24 +286,8 @@ color:#777;
 font-size:36px;
 }
 
-.hero p{
-font-size:16px;
-}
-
-.section-title{
-font-size:28px;
-}
-
-nav{
-display:none;
-}
-
 .stock-grid{
 grid-template-columns:repeat(2,1fr);
-}
-
-.stock-card{
-min-height:260px;
 }
 
 }
@@ -320,65 +301,60 @@ min-height:260px;
 <header>
 
 <div class="logo">
-NiftyDataHub
+NiftyDataHub Pro
 </div>
 
-<nav>
-<a href="#">Home</a>
-<a href="#">Market</a>
-<a href="#">News</a>
-<a href="#">Analysis</a>
-</nav>
+<div class="header-right">
+
+<button class="theme-btn" onclick="toggleTheme()">
+🌙 Theme
+</button>
+
+</div>
 
 </header>
-
-<div class="market-status">
-🟢 MARKET OPEN • Real Delayed Data • Auto Refresh Every 60 Seconds
-</div>
 
 <!-- HERO -->
 
 <section class="hero">
 
 <h1>
-Indian Stock Market Dashboard
+Indian Market Dashboard
 </h1>
 
 <p>
-Professional Real-Time Indian Market Analytics
+Professional Real-Time Analytics Platform
 </p>
-
-<a href="#" class="hero-btn">
-Explore Market
-</a>
 
 </section>
 
-<!-- LIVE INDICES -->
-
-<section class="market-indices">
+<!-- INDICES -->
 
 <h2 class="section-title">
 Live Market Indices
 </h2>
 
 <div class="indices-grid" id="indicesContainer">
-
-<div class="index-card">
 Loading...
 </div>
 
-</div>
-
-</section>
-
-<!-- SEARCH -->
+<!-- HEATMAP -->
 
 <h2 class="section-title">
-Nifty Market Tiles
+Market Heatmap
 </h2>
 
-<div class="search-box">
+<div class="heatmap" id="heatmap">
+Loading...
+</div>
+
+<!-- CONTROLS -->
+
+<h2 class="section-title">
+Market Tiles
+</h2>
+
+<div class="controls">
 
 <input
 type="text"
@@ -387,61 +363,70 @@ placeholder="Search Stock..."
 onkeyup="searchStocks()"
 >
 
+<select id="sortSelect" onchange="sortStocks()">
+
+<option value="default">
+Sort By
+</option>
+
+<option value="gainers">
+Top Gainers
+</option>
+
+<option value="losers">
+Top Losers
+</option>
+
+<option value="volume">
+Highest Volume
+</option>
+
+<option value="marketcap">
+Largest Market Cap
+</option>
+
+</select>
+
 </div>
 
 <!-- STOCK GRID -->
 
-<div id="stockGrid" class="stock-grid">
-
-<div class="stock-card">
-Loading Stocks...
-</div>
-
-</div>
-
-<!-- TOP MOVERS -->
-
-<h2 class="section-title">
-Top Market Movers
-</h2>
-
-<section class="movers">
-
-<div class="mover-card">
-
-<h3>Top Gainers</h3>
-
-<div id="gainers">
+<div class="stock-grid" id="stockGrid">
 Loading...
 </div>
 
+<!-- CHART MODAL -->
+
+<div class="modal" id="chartModal">
+
+<div class="modal-content">
+
+<div class="close-btn" onclick="closeChart()">
+×
 </div>
 
-<div class="mover-card">
+<iframe
+id="largeChart"
+width="100%"
+height="100%"
+frameborder="0">
+</iframe>
 
-<h3>Top Losers</h3>
-
-<div id="losers">
-Loading...
 </div>
 
 </div>
-
-</section>
 
 <!-- FOOTER -->
 
 <footer>
 
-© 2026 NiftyDataHub • Educational Purpose Only
+© 2026 NiftyDataHub Pro
 
 </footer>
 
 <script>
 
-/* =========================
-GOOGLE SHEETS URLS
-========================= */
+/* URLS */
 
 const STOCKS_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=0&single=true&output=csv";
@@ -449,13 +434,13 @@ const STOCKS_URL =
 const INDICES_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=1647598626&single=true&output=csv";
 
-/* =========================
-LOAD INDICES
-========================= */
+let allStocks = [];
+let watchlist =
+JSON.parse(localStorage.getItem("watchlist")) || [];
+
+/* LOAD INDICES */
 
 async function loadIndices(){
-
-try{
 
 const response =
 await fetch(`${INDICES_URL}&t=${Date.now()}`);
@@ -471,36 +456,27 @@ document.getElementById("indicesContainer");
 
 container.innerHTML = "";
 
-rows.forEach(row => {
+rows.forEach(row=>{
 
-const cols =
-row.split(",");
-
-if(cols.length < 3) return;
-
-const name = cols[0];
-const price = cols[1];
-const change = cols[2];
+const cols = row.split(",");
 
 const positive =
-!change.includes("-");
+!cols[2].includes("-");
 
 container.innerHTML += `
 
 <div class="index-card">
 
 <div class="index-name">
-${name}
+${cols[0]}
 </div>
 
 <div class="index-price">
-${Number(price).toLocaleString("en-IN")}
+${cols[1]}
 </div>
 
-<div class="index-change ${positive ? "positive":"negative"}">
-
-${positive ? "▲":"▼"} ${change}
-
+<div class="${positive ? "positive":"negative"}">
+${positive ? "▲":"▼"} ${cols[2]}
 </div>
 
 </div>
@@ -509,21 +485,11 @@ ${positive ? "▲":"▼"} ${change}
 
 });
 
-}catch(error){
-
-console.log(error);
-
 }
 
-}
-
-/* =========================
-LOAD STOCKS
-========================= */
+/* LOAD STOCKS */
 
 async function loadStocks(){
-
-try{
 
 const response =
 await fetch(`${STOCKS_URL}&t=${Date.now()}`);
@@ -531,24 +497,29 @@ await fetch(`${STOCKS_URL}&t=${Date.now()}`);
 const csv =
 await response.text();
 
-const rows =
+allStocks =
 csv.trim().split("\n").slice(1);
+
+renderStocks(allStocks);
+
+renderHeatmap(allStocks);
+
+}
+
+/* RENDER STOCKS */
+
+function renderStocks(stocks){
 
 const grid =
 document.getElementById("stockGrid");
 
 grid.innerHTML = "";
 
-let stocks = [];
+stocks.forEach(row=>{
 
-rows.forEach(row => {
-
-const cols =
-row.split(",");
+const cols = row.split(",");
 
 if(cols.length < 9) return;
-
-stocks.push(cols);
 
 const stock = cols[0];
 const price = cols[1];
@@ -563,19 +534,34 @@ const marketCap = cols[8];
 const positive =
 !change.includes("-");
 
+const saved =
+watchlist.includes(stock);
+
 grid.innerHTML += `
 
 <div class="stock-card">
 
-<div class="stock-name">
+<div class="watchlist-btn"
+onclick="toggleWatchlist('${stock}')">
+
+${saved ? "⭐":"☆"}
+
+</div>
+
+<div class="stock-name"
+onclick="openChart('${stock}')">
+
 ${stock}
+
 </div>
 
 <div class="stock-price">
+
 ₹${Number(price).toLocaleString("en-IN")}
+
 </div>
 
-<div class="stock-change ${positive ? "positive":"negative"}">
+<div class="${positive ? "positive":"negative"}">
 
 ${positive ? "▲":"▼"} ${change}%
 
@@ -595,7 +581,17 @@ MCap: ₹${marketCap}
 
 </div>
 
-<div class="stock-chart"></div>
+<div class="stock-chart">
+
+<iframe
+src="https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark&style=1&locale=en"
+width="100%"
+height="40"
+frameborder="0"
+scrolling="no">
+</iframe>
+
+</div>
 
 </div>
 
@@ -603,19 +599,9 @@ MCap: ₹${marketCap}
 
 });
 
-loadMovers(stocks);
-
-}catch(error){
-
-console.log(error);
-
 }
 
-}
-
-/* =========================
-SEARCH STOCKS
-========================= */
+/* SEARCH */
 
 function searchStocks(){
 
@@ -624,80 +610,146 @@ document.getElementById("searchInput")
 .value
 .toUpperCase();
 
-let cards =
-document.querySelectorAll(".stock-card");
+let filtered =
+allStocks.filter(row =>
+row.toUpperCase().includes(input)
+);
 
-cards.forEach(card => {
+renderStocks(filtered);
 
-let text =
-card.innerText;
+}
 
-if(text.toUpperCase().indexOf(input) > -1){
+/* SORTING */
 
-card.style.display = "";
+function sortStocks(){
+
+const type =
+document.getElementById("sortSelect").value;
+
+let sorted = [...allStocks];
+
+if(type==="gainers"){
+
+sorted.sort((a,b)=>
+parseFloat(b.split(",")[4]) -
+parseFloat(a.split(",")[4])
+);
+
+}
+
+if(type==="losers"){
+
+sorted.sort((a,b)=>
+parseFloat(a.split(",")[4]) -
+parseFloat(b.split(",")[4])
+);
+
+}
+
+if(type==="volume"){
+
+sorted.sort((a,b)=>
+parseFloat(b.split(",")[7]) -
+parseFloat(a.split(",")[7])
+);
+
+}
+
+renderStocks(sorted);
+
+}
+
+/* WATCHLIST */
+
+function toggleWatchlist(stock){
+
+if(watchlist.includes(stock)){
+
+watchlist =
+watchlist.filter(s=>s!==stock);
 
 }else{
 
-card.style.display = "none";
+watchlist.push(stock);
 
 }
+
+localStorage.setItem(
+"watchlist",
+JSON.stringify(watchlist)
+);
+
+renderStocks(allStocks);
+
+}
+
+/* LARGE CHART */
+
+function openChart(stock){
+
+document.getElementById("chartModal")
+.style.display = "flex";
+
+document.getElementById("largeChart")
+.src =
+`https://s.tradingview.com/widgetembed/?symbol=NSE:${stock}&interval=D&theme=dark`;
+
+}
+
+function closeChart(){
+
+document.getElementById("chartModal")
+.style.display = "none";
+
+}
+
+/* HEATMAP */
+
+function renderHeatmap(stocks){
+
+const heatmap =
+document.getElementById("heatmap");
+
+heatmap.innerHTML = "";
+
+stocks.slice(0,20).forEach(row=>{
+
+const cols = row.split(",");
+
+const stock = cols[0];
+const change = parseFloat(cols[4]);
+
+const color =
+change >= 0
+? "#00aa55"
+: "#cc3333";
+
+heatmap.innerHTML += `
+
+<div class="heat-tile"
+style="background:${color}">
+
+${stock}<br>
+
+${change}%
+
+</div>
+
+`;
 
 });
 
 }
 
-/* =========================
-TOP MOVERS
-========================= */
+/* THEME */
 
-function loadMovers(stocks){
+function toggleTheme(){
 
-let sorted =
-stocks.sort((a,b)=>
-parseFloat(b[4]) - parseFloat(a[4])
-);
-
-let gainers =
-sorted.slice(0,3);
-
-let losers =
-sorted.slice(-3);
-
-document.getElementById("gainers").innerHTML =
-gainers.map(stock => `
-
-<div class="mover-item">
-
-<span>${stock[0]}</span>
-
-<span class="positive">
-${stock[4]}%
-</span>
-
-</div>
-
-`).join("");
-
-document.getElementById("losers").innerHTML =
-losers.reverse().map(stock => `
-
-<div class="mover-item">
-
-<span>${stock[0]}</span>
-
-<span class="negative">
-${stock[4]}%
-</span>
-
-</div>
-
-`).join("");
+document.body.classList.toggle("light-mode");
 
 }
 
-/* =========================
-AUTO LOAD
-========================= */
+/* AUTO LOAD */
 
 loadIndices();
 loadStocks();
