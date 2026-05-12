@@ -100,14 +100,16 @@ transition:.3s;
 transform:scale(1.05);
 }
 
-/* MARKET SECTION */
+/* SECTION TITLES */
 
 .section-title{
 font-size:42px;
 text-align:center;
-margin:50px 0 30px;
+margin:60px 0 30px;
 color:#00e5ff;
 }
+
+/* MARKET CARDS */
 
 .cards{
 display:grid;
@@ -148,7 +150,7 @@ font-size:18px;
 color:#00ff88;
 }
 
-/* NEWS SECTION */
+/* NEWS */
 
 .news-section{
 padding:20px;
@@ -181,6 +183,56 @@ font-size:24px;
 .news-card p{
 color:#aaa;
 line-height:1.6;
+}
+
+/* SCREENER */
+
+.screener{
+padding:20px;
+}
+
+#searchInput{
+width:100%;
+padding:16px;
+background:#161616;
+border:1px solid #2a2a2a;
+border-radius:12px;
+color:white;
+font-size:18px;
+margin-bottom:20px;
+outline:none;
+}
+
+.stock-list{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.stock-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#161616;
+padding:18px;
+border-radius:14px;
+border:1px solid #2a2a2a;
+transition:.3s;
+}
+
+.stock-item:hover{
+border-color:#00e5ff;
+transform:translateY(-3px);
+}
+
+.green{
+color:#00ff88;
+font-weight:bold;
+}
+
+.red{
+color:#ff4d4d;
+font-weight:bold;
 }
 
 /* FOOTER */
@@ -238,6 +290,10 @@ font-size:32px;
 font-size:40px;
 }
 
+.stock-item{
+font-size:14px;
+}
+
 }
 
 </style>
@@ -284,7 +340,7 @@ Explore Market
 
 </section>
 
-<!-- MARKET -->
+<!-- MARKET OVERVIEW -->
 
 <h2 class="section-title">
 Live Market Overview
@@ -293,64 +349,32 @@ Live Market Overview
 <section class="cards">
 
 <div class="card">
-
 <h2>NIFTY 50</h2>
-
-<div class="price">
-24,500
-</div>
-
-<div class="change">
-▲ +0.82%
-</div>
-
+<div class="price">24,500</div>
+<div class="change">▲ +0.82%</div>
 </div>
 
 <div class="card">
-
 <h2>BANK NIFTY</h2>
-
-<div class="price">
-52,000
-</div>
-
-<div class="change">
-▲ +1.14%
-</div>
-
+<div class="price">52,000</div>
+<div class="change">▲ +1.14%</div>
 </div>
 
 <div class="card">
-
 <h2>SENSEX</h2>
-
-<div class="price">
-80,000
-</div>
-
-<div class="change">
-▲ +0.76%
-</div>
-
+<div class="price">80,000</div>
+<div class="change">▲ +0.76%</div>
 </div>
 
 <div class="card">
-
 <h2>FINNIFTY</h2>
-
-<div class="price">
-24,100
-</div>
-
-<div class="change">
-▲ +0.64%
-</div>
-
+<div class="price">24,100</div>
+<div class="change">▲ +0.64%</div>
 </div>
 
 </section>
 
-<!-- NEWS -->
+<!-- MARKET NEWS -->
 
 <h2 class="section-title">
 Market News
@@ -361,33 +385,87 @@ Market News
 <div class="news-grid">
 
 <div class="news-card">
-
 <h3>Markets Rally on Banking Strength</h3>
-
 <p>
 Banking and financial stocks pushed Indian markets higher amid strong institutional buying.
 </p>
-
 </div>
 
 <div class="news-card">
-
 <h3>IT Sector Gains Momentum</h3>
-
 <p>
 Major IT companies showed positive momentum as global tech sentiment improved.
 </p>
-
 </div>
 
 <div class="news-card">
-
 <h3>FII Buying Continues</h3>
-
 <p>
 Foreign institutional investors continue heavy buying in Indian equities this week.
 </p>
+</div>
 
+</div>
+
+</section>
+
+<!-- NIFTY 50 SCREENER -->
+
+<h2 class="section-title">
+Nifty 50 Screener
+</h2>
+
+<section class="screener">
+
+<input 
+type="text"
+id="searchInput"
+placeholder="Search Nifty 50 Stock..."
+onkeyup="searchStock()"
+>
+
+<div class="stock-list">
+
+<div class="stock-item">
+<span>RELIANCE</span>
+<span>₹2950</span>
+<span class="green">+1.2%</span>
+</div>
+
+<div class="stock-item">
+<span>TCS</span>
+<span>₹4100</span>
+<span class="red">-0.4%</span>
+</div>
+
+<div class="stock-item">
+<span>INFY</span>
+<span>₹1580</span>
+<span class="green">+2.1%</span>
+</div>
+
+<div class="stock-item">
+<span>HDFCBANK</span>
+<span>₹1680</span>
+<span class="green">+0.9%</span>
+</div>
+
+<div class="stock-item">
+<span>ICICIBANK</span>
+<span>₹1210</span>
+<span class="green">+1.8%</span>
+</div>
+
+<div class="stock-item">
+<span>SBIN</span>
+<span>₹840</span>
+<span class="green">+0.6%</span>
+</div>
+
+<div class="stock-item">
+<span>BHARTIARTL</span>
+<span>₹1520</span>
+<span class="red">-0.3%</span>
 </div>
 
 </div>
@@ -408,6 +486,35 @@ Foreign institutional investors continue heavy buying in Indian equities this we
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("show");
+}
+
+function searchStock(){
+
+let input =
+document.getElementById("searchInput")
+.value
+.toUpperCase();
+
+let items =
+document.querySelectorAll(".stock-item");
+
+items.forEach(item => {
+
+let text =
+item.innerText;
+
+if(text.toUpperCase().indexOf(input) > -1){
+
+item.style.display = "";
+
+}else{
+
+item.style.display = "none";
+
+}
+
+});
+
 }
 
 </script>
