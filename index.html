@@ -156,6 +156,8 @@ font-size:15px;
 font-weight:bold;
 }
 
+/* COLORS */
+
 .positive{
 color:#00ff88;
 }
@@ -196,7 +198,7 @@ padding:16px;
 border-radius:16px;
 border:1px solid #222;
 transition:.3s;
-min-height:190px;
+min-height:250px;
 }
 
 .stock-card:hover{
@@ -226,9 +228,11 @@ margin-bottom:10px;
 .stock-details{
 font-size:12px;
 color:#aaa;
-line-height:1.6;
+line-height:1.7;
 margin-top:8px;
 }
+
+/* MINI CHART PLACEHOLDER */
 
 .stock-chart{
 height:40px;
@@ -238,7 +242,7 @@ background:linear-gradient(90deg,#00ff88,#00d9ff);
 opacity:0.2;
 }
 
-/* MOVERS */
+/* TOP MOVERS */
 
 .movers{
 display:grid;
@@ -299,6 +303,10 @@ display:none;
 
 .stock-grid{
 grid-template-columns:repeat(2,1fr);
+}
+
+.stock-card{
+min-height:260px;
 }
 
 }
@@ -538,25 +546,22 @@ rows.forEach(row => {
 const cols =
 row.split(",");
 
-if(cols.length < 5) return;
+if(cols.length < 9) return;
 
 stocks.push(cols);
 
 const stock = cols[0];
 const price = cols[1];
-const high = cols[2];
-const low = cols[3];
+const high52 = cols[2];
+const low52 = cols[3];
 const change = cols[4];
+const dayLow = cols[5];
+const dayHigh = cols[6];
+const volume = cols[7];
+const marketCap = cols[8];
 
 const positive =
 !change.includes("-");
-
-/* FAKE DEMO VALUES */
-const volume =
-(Math.random()*10).toFixed(1)+"M";
-
-const marketCap =
-(Math.random()*20).toFixed(1)+"T";
 
 grid.innerHTML += `
 
@@ -578,11 +583,15 @@ ${positive ? "▲":"▼"} ${change}%
 
 <div class="stock-details">
 
-Vol: ${volume}<br>
+Day H: ${dayHigh}<br>
+Day L: ${dayLow}<br>
 
-MCap: ₹${marketCap}<br>
+52W H: ${high52}<br>
+52W L: ${low52}<br>
 
-52W: ${low} - ${high}
+Vol: ${Number(volume).toLocaleString("en-IN")}<br>
+
+MCap: ₹${marketCap}
 
 </div>
 
