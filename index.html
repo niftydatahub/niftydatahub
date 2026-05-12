@@ -59,7 +59,7 @@ nav a:hover{
 color:#00d9ff;
 }
 
-/* MARKET STATUS */
+/* STATUS */
 
 .market-status{
 background:#101010;
@@ -98,16 +98,16 @@ text-decoration:none;
 border-radius:12px;
 }
 
-/* SECTION */
+/* TITLES */
 
 .section-title{
-font-size:40px;
+font-size:38px;
 text-align:center;
 margin:60px 0 30px;
 color:#00d9ff;
 }
 
-/* INDICES */
+/* LIVE INDICES */
 
 .market-indices{
 padding:20px;
@@ -115,13 +115,13 @@ padding:20px;
 
 .indices-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:18px;
 }
 
 .index-card{
 background:#111;
-padding:22px;
+padding:20px;
 border-radius:18px;
 border:1px solid #222;
 transition:.3s;
@@ -135,13 +135,13 @@ box-shadow:0 0 20px rgba(0,217,255,0.15);
 
 .index-name{
 color:#00d9ff;
-font-size:18px;
+font-size:16px;
 font-weight:bold;
 margin-bottom:12px;
 }
 
 .index-price{
-font-size:32px;
+font-size:30px;
 font-weight:bold;
 margin-bottom:10px;
 }
@@ -274,7 +274,7 @@ font-size:18px;
 }
 
 .section-title{
-font-size:32px;
+font-size:30px;
 }
 
 nav{
@@ -282,7 +282,7 @@ display:none;
 }
 
 .index-price{
-font-size:28px;
+font-size:26px;
 }
 
 .stock-price{
@@ -334,18 +334,22 @@ Explore Market
 
 </section>
 
-<!-- INDICES -->
+<!-- LIVE MARKET INDICES -->
+
+<section class="market-indices">
 
 <h2 class="section-title">
 Live Market Indices
 </h2>
 
-<section class="market-indices">
-
-<div id="indicesContainer" class="indices-grid">
+<div class="indices-grid" id="indicesContainer">
 
 <div class="index-card">
+
+<div class="index-name">
 Loading...
+</div>
+
 </div>
 
 </div>
@@ -379,7 +383,7 @@ Loading stocks...
 
 </div>
 
-<!-- MOVERS -->
+<!-- TOP MOVERS -->
 
 <h2 class="section-title">
 Top Market Movers
@@ -425,7 +429,7 @@ const STOCKS_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=0&single=true&output=csv";
 
 const INDICES_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=1281901121&single=true&output=csv";
 
 /* LOAD INDICES */
 
@@ -477,7 +481,9 @@ ${Number(price).toLocaleString("en-IN")}
 </div>
 
 <div class="index-change ${positive ? "positive":"negative"}">
+
 ${positive ? "▲":"▼"} ${change}
+
 </div>
 
 </div>
