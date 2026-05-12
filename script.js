@@ -1,67 +1,61 @@
-const stocks = [
-  "RELIANCE.NS",
-  "TCS.NS",
-  "HDFCBANK.NS",
-  "INFY.NS",
-  "ICICIBANK.NS",
-  "ITC.NS",
-  "SBIN.NS",
-  "BHARTIARTL.NS",
-  "LT.NS",
-  "ASIANPAINT.NS",
-  "AXISBANK.NS",
-  "BAJFINANCE.NS",
-  "BAJAJFINSV.NS",
-  "HCLTECH.NS",
-  "KOTAKBANK.NS",
-  "MARUTI.NS",
-  "SUNPHARMA.NS",
-  "TITAN.NS",
-  "ULTRACEMCO.NS",
-  "WIPRO.NS"
-];
+// LIVE MARKET INDICES
 
-const table = document.createElement("table");
+const INDICES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?output=csv";
 
-table.style.width = "100%";
-table.style.borderCollapse = "collapse";
-table.style.color = "white";
+async function loadIndices() {
 
-table.innerHTML = `
-<tr>
-  <th>Stock</th>
-  <th>Price</th>
-  <th>52H</th>
-  <th>52L</th>
-  <th>Change%</th>
-</tr>
-`;
+  try {
 
-document.body.appendChild(table);
+    const response = await fetch(`${INDICES_URL}&t=${Date.now()}`);
 
-stocks.forEach(symbol => {
+    const csv = await response.text();
 
-  const price = (Math.random() * 4000 + 500).toFixed(2);
-  const high52 = (price * 1.2).toFixed(2);
-  const low52 = (price * 0.7).toFixed(2);
-  const change = (Math.random() * 4 - 2).toFixed(2);
+    const rows = csv.trim().split("\n").slice(1);
 
-  const row = document.createElement("tr");
+    const container = document.getElementById("indicesContainer");
 
-  row.innerHTML = `
-    <td>${symbol}</td>
-    <td>₹${price}</td>
-    <td>₹${high52}</td>
-    <td>₹${low52}</td>
-    <td style="color:${change >= 0 ? 'lime' : 'red'}">
-      ${change}%
-    </td>
-  `;
+    container.innerHTML = "";
 
-  row.style.textAlign = "center";
-  row.style.borderBottom = "1px solid #333";
-  row.style.height = "45px";
+    rows.forEach((row) => {
 
-  table.appendChild(row);
+      const cols = row.split(",");
 
-});
+      const name = cols[0];
+
+      const price = cols[1];
+
+      const change = cols[2];
+
+      const positive = !change.includes("-");
+
+      container.innerHTML += `
+
+        <div class="index-card">
+
+          <div class="index-name">
+            ${name}
+          </div>
+
+          <div class="index-price">
+            ${Number(price).toLocaleString("en-IN")}
+          </div>
+
+          <div class="index-change ${positive ? "positive" : "negative"}">
+            ${positive ? "▲" : "▼"} ${change}
+          </div>
+
+        </div>
+
+      `;
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+}
+
+loadIndices();
+
+setInterval(loadIndices, 60000);
