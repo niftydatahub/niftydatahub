@@ -210,14 +210,15 @@ gap:15px;
 }
 
 .stock-item{
-display:flex;
-justify-content:space-between;
+display:grid;
+grid-template-columns:repeat(5,1fr);
 align-items:center;
 background:#161616;
 padding:18px;
 border-radius:14px;
 border:1px solid #2a2a2a;
 transition:.3s;
+text-align:center;
 }
 
 .stock-item:hover{
@@ -291,6 +292,8 @@ font-size:40px;
 }
 
 .stock-item{
+grid-template-columns:1fr;
+gap:8px;
 font-size:14px;
 }
 
@@ -324,8 +327,6 @@ NiftyDataHub
 
 </header>
 
-<!-- HERO -->
-
 <section class="hero">
 
 <h1>Indian Stock Market Dashboard</h1>
@@ -339,8 +340,6 @@ Explore Market
 </a>
 
 </section>
-
-<!-- MARKET OVERVIEW -->
 
 <h2 class="section-title">
 Live Market Overview
@@ -373,8 +372,6 @@ Live Market Overview
 </div>
 
 </section>
-
-<!-- MARKET NEWS -->
 
 <h2 class="section-title">
 Market News
@@ -409,8 +406,6 @@ Foreign institutional investors continue heavy buying in Indian equities this we
 
 </section>
 
-<!-- NIFTY 50 SCREENER -->
-
 <h2 class="section-title">
 Nifty 50 Screener
 </h2>
@@ -425,54 +420,9 @@ onkeyup="searchStock()"
 >
 
 <div class="stock-list">
-
-<div class="stock-item">
-<span>RELIANCE</span>
-<span>₹2950</span>
-<span class="green">+1.2%</span>
-</div>
-
-<div class="stock-item">
-<span>TCS</span>
-<span>₹4100</span>
-<span class="red">-0.4%</span>
-</div>
-
-<div class="stock-item">
-<span>INFY</span>
-<span>₹1580</span>
-<span class="green">+2.1%</span>
-</div>
-
-<div class="stock-item">
-<span>HDFCBANK</span>
-<span>₹1680</span>
-<span class="green">+0.9%</span>
-</div>
-
-<div class="stock-item">
-<span>ICICIBANK</span>
-<span>₹1210</span>
-<span class="green">+1.8%</span>
-</div>
-
-<div class="stock-item">
-<span>SBIN</span>
-<span>₹840</span>
-<span class="green">+0.6%</span>
-</div>
-
-<div class="stock-item">
-<span>BHARTIARTL</span>
-<span>₹1520</span>
-<span class="red">-0.3%</span>
-</div>
-
 </div>
 
 </section>
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -484,9 +434,64 @@ onkeyup="searchStock()"
 
 <script>
 
-function toggleMenu(){
+function toggleMenu() {
 document.getElementById("menu").classList.toggle("show");
 }
+
+const stocks = [
+
+{symbol:"RELIANCE",price:2950,change:1.2,high:3120,low:2220},
+{symbol:"TCS",price:4100,change:-0.4,high:4250,low:3311},
+{symbol:"INFY",price:1580,change:2.1,high:1750,low:1350},
+{symbol:"HDFCBANK",price:1680,change:0.9,high:1794,low:1363},
+{symbol:"ICICIBANK",price:1210,change:1.8,high:1257,low:899},
+{symbol:"SBIN",price:840,change:0.6,high:912,low:543},
+{symbol:"BHARTIARTL",price:1520,change:-0.3,high:1590,low:870},
+{symbol:"LT",price:3650,change:1.1,high:3920,low:2700},
+{symbol:"ITC",price:430,change:-0.7,high:499,low:399},
+{symbol:"KOTAKBANK",price:1780,change:0.5,high:1920,low:1543},
+{symbol:"ASIANPAINT",price:2890,change:-1.2,high:3568,low:2685},
+{symbol:"BAJFINANCE",price:7100,change:2.4,high:8190,low:6187}
+
+];
+
+function renderStocks(data){
+
+const stockList =
+document.querySelector(".stock-list");
+
+stockList.innerHTML = "";
+
+data.forEach(stock => {
+
+const color =
+stock.change >= 0 ? "green" : "red";
+
+stockList.innerHTML += `
+
+<div class="stock-item">
+
+<span>${stock.symbol}</span>
+
+<span>₹${stock.price}</span>
+
+<span>52H: ₹${stock.high}</span>
+
+<span>52L: ₹${stock.low}</span>
+
+<span class="${color}">
+${stock.change}%
+</span>
+
+</div>
+
+`;
+
+});
+
+}
+
+renderStocks(stocks);
 
 function searchStock(){
 
@@ -495,25 +500,12 @@ document.getElementById("searchInput")
 .value
 .toUpperCase();
 
-let items =
-document.querySelectorAll(".stock-item");
+let filtered =
+stocks.filter(stock =>
+stock.symbol.includes(input)
+);
 
-items.forEach(item => {
-
-let text =
-item.innerText;
-
-if(text.toUpperCase().indexOf(input) > -1){
-
-item.style.display = "";
-
-}else{
-
-item.style.display = "none";
-
-}
-
-});
+renderStocks(filtered);
 
 }
 
