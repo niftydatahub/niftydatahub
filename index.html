@@ -59,7 +59,7 @@ nav a:hover{
 color:#00d9ff;
 }
 
-/* STATUS */
+/* MARKET STATUS */
 
 .market-status{
 background:#101010;
@@ -73,24 +73,24 @@ border-bottom:1px solid #222;
 /* HERO */
 
 .hero{
-padding:80px 20px;
+padding:70px 20px;
 text-align:center;
 }
 
 .hero h1{
-font-size:55px;
-margin-bottom:20px;
+font-size:52px;
+margin-bottom:18px;
 }
 
 .hero p{
-font-size:20px;
+font-size:18px;
 color:#999;
-margin-bottom:35px;
+margin-bottom:30px;
 }
 
 .hero-btn{
 display:inline-block;
-padding:15px 35px;
+padding:14px 30px;
 background:#00d9ff;
 color:black;
 font-weight:bold;
@@ -106,13 +106,13 @@ transform:scale(1.05);
 /* TITLES */
 
 .section-title{
-font-size:38px;
+font-size:34px;
 text-align:center;
-margin:60px 0 30px;
+margin:50px 0 25px;
 color:#00d9ff;
 }
 
-/* INDICES */
+/* LIVE INDICES */
 
 .market-indices{
 padding:20px;
@@ -120,39 +120,39 @@ padding:20px;
 
 .indices-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:18px;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:16px;
 }
 
 .index-card{
 background:#111;
-padding:20px;
-border-radius:18px;
+padding:18px;
+border-radius:16px;
 border:1px solid #222;
 transition:.3s;
 }
 
 .index-card:hover{
-transform:translateY(-5px);
+transform:translateY(-4px);
 border-color:#00d9ff;
-box-shadow:0 0 20px rgba(0,217,255,0.15);
+box-shadow:0 0 15px rgba(0,217,255,0.15);
 }
 
 .index-name{
 color:#00d9ff;
-font-size:16px;
+font-size:15px;
 font-weight:bold;
 margin-bottom:10px;
 }
 
 .index-price{
-font-size:34px;
+font-size:28px;
 font-weight:bold;
 margin-bottom:10px;
 }
 
 .index-change{
-font-size:16px;
+font-size:15px;
 font-weight:bold;
 }
 
@@ -172,89 +172,105 @@ padding:20px;
 
 #searchInput{
 width:100%;
-padding:16px;
+padding:15px;
 background:#111;
 border:1px solid #222;
 border-radius:12px;
 color:white;
-font-size:16px;
+font-size:15px;
 outline:none;
 }
 
-/* TABLE */
+/* STOCK GRID */
 
-.table-wrapper{
+.stock-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:14px;
 padding:20px;
-overflow-x:auto;
 }
 
-.stock-table{
-width:100%;
-border-collapse:collapse;
-min-width:800px;
+.stock-card{
 background:#111;
-border-radius:18px;
-overflow:hidden;
-}
-
-.stock-table thead{
-background:#00d9ff;
-color:black;
-}
-
-.stock-table th{
-padding:18px;
-text-align:left;
-font-size:15px;
-}
-
-.stock-table td{
-padding:18px;
-border-bottom:1px solid #222;
-font-size:15px;
-}
-
-.stock-table tbody tr{
+padding:16px;
+border-radius:16px;
+border:1px solid #222;
 transition:.3s;
+min-height:190px;
 }
 
-.stock-table tbody tr:hover{
-background:#161616;
+.stock-card:hover{
+transform:translateY(-4px);
+border-color:#00d9ff;
+box-shadow:0 0 15px rgba(0,217,255,0.15);
+}
+
+.stock-name{
+font-size:15px;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.stock-price{
+font-size:22px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.stock-change{
+font-size:14px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.stock-details{
+font-size:12px;
+color:#aaa;
+line-height:1.6;
+margin-top:8px;
+}
+
+.stock-chart{
+height:40px;
+margin-top:12px;
+border-radius:10px;
+background:linear-gradient(90deg,#00ff88,#00d9ff);
+opacity:0.2;
 }
 
 /* MOVERS */
 
 .movers{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
 padding:20px;
 }
 
 .mover-card{
 background:#111;
-padding:25px;
-border-radius:18px;
+padding:22px;
+border-radius:16px;
 border:1px solid #222;
 }
 
 .mover-card h3{
-font-size:28px;
-margin-bottom:20px;
+font-size:24px;
+margin-bottom:18px;
 color:#00d9ff;
 }
 
 .mover-item{
 display:flex;
 justify-content:space-between;
-margin-bottom:15px;
+margin-bottom:14px;
 }
 
 /* FOOTER */
 
 footer{
-margin-top:70px;
-padding:40px;
+margin-top:60px;
+padding:35px;
 text-align:center;
 background:#0d0d0d;
 border-top:2px solid #00d9ff;
@@ -266,23 +282,23 @@ color:#777;
 @media(max-width:768px){
 
 .hero h1{
-font-size:38px;
+font-size:36px;
 }
 
 .hero p{
-font-size:17px;
+font-size:16px;
 }
 
 .section-title{
-font-size:30px;
+font-size:28px;
 }
 
 nav{
 display:none;
 }
 
-.index-price{
-font-size:28px;
+.stock-grid{
+grid-template-columns:repeat(2,1fr);
 }
 
 }
@@ -330,7 +346,7 @@ Explore Market
 
 </section>
 
-<!-- INDICES -->
+<!-- LIVE INDICES -->
 
 <section class="market-indices">
 
@@ -351,7 +367,7 @@ Loading...
 <!-- SEARCH -->
 
 <h2 class="section-title">
-Nifty Stocks Screener
+Nifty Market Tiles
 </h2>
 
 <div class="search-box">
@@ -365,35 +381,13 @@ onkeyup="searchStocks()"
 
 </div>
 
-<!-- TABLE -->
+<!-- STOCK GRID -->
 
-<div class="table-wrapper">
+<div id="stockGrid" class="stock-grid">
 
-<table class="stock-table">
-
-<thead>
-
-<tr>
-<th>Stock</th>
-<th>Price</th>
-<th>Change %</th>
-<th>52W High</th>
-<th>52W Low</th>
-</tr>
-
-</thead>
-
-<tbody id="stockTableBody">
-
-<tr>
-<td colspan="5">
+<div class="stock-card">
 Loading Stocks...
-</td>
-</tr>
-
-</tbody>
-
-</table>
+</div>
 
 </div>
 
@@ -437,7 +431,9 @@ Loading...
 
 <script>
 
-/* URLS */
+/* =========================
+GOOGLE SHEETS URLS
+========================= */
 
 const STOCKS_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=0&single=true&output=csv";
@@ -445,7 +441,9 @@ const STOCKS_URL =
 const INDICES_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQp9P30QbhWlYzbPIdYUjhlmL8oVseRGo5vMYoIPrLpy2oEmok6kC1QAbpDBXkEX-9oiD7YcAACo2Lw/pub?gid=1647598626&single=true&output=csv";
 
-/* LOAD INDICES */
+/* =========================
+LOAD INDICES
+========================= */
 
 async function loadIndices(){
 
@@ -467,7 +465,8 @@ container.innerHTML = "";
 
 rows.forEach(row => {
 
-const cols = row.split(",");
+const cols =
+row.split(",");
 
 if(cols.length < 3) return;
 
@@ -504,13 +503,15 @@ ${positive ? "▲":"▼"} ${change}
 
 }catch(error){
 
-console.log("Indices Error:",error);
+console.log(error);
 
 }
 
 }
 
-/* LOAD STOCKS */
+/* =========================
+LOAD STOCKS
+========================= */
 
 async function loadStocks(){
 
@@ -525,16 +526,17 @@ await response.text();
 const rows =
 csv.trim().split("\n").slice(1);
 
-const tbody =
-document.getElementById("stockTableBody");
+const grid =
+document.getElementById("stockGrid");
 
-tbody.innerHTML = "";
+grid.innerHTML = "";
 
 let stocks = [];
 
 rows.forEach(row => {
 
-const cols = row.split(",");
+const cols =
+row.split(",");
 
 if(cols.length < 5) return;
 
@@ -549,25 +551,44 @@ const change = cols[4];
 const positive =
 !change.includes("-");
 
-tbody.innerHTML += `
+/* FAKE DEMO VALUES */
+const volume =
+(Math.random()*10).toFixed(1)+"M";
 
-<tr>
+const marketCap =
+(Math.random()*20).toFixed(1)+"T";
 
-<td>${stock}</td>
+grid.innerHTML += `
 
-<td>₹${Number(price).toLocaleString("en-IN")}</td>
+<div class="stock-card">
 
-<td class="${positive ? "positive":"negative"}">
+<div class="stock-name">
+${stock}
+</div>
+
+<div class="stock-price">
+₹${Number(price).toLocaleString("en-IN")}
+</div>
+
+<div class="stock-change ${positive ? "positive":"negative"}">
 
 ${positive ? "▲":"▼"} ${change}%
 
-</td>
+</div>
 
-<td>${high}</td>
+<div class="stock-details">
 
-<td>${low}</td>
+Vol: ${volume}<br>
 
-</tr>
+MCap: ₹${marketCap}<br>
+
+52W: ${low} - ${high}
+
+</div>
+
+<div class="stock-chart"></div>
+
+</div>
 
 `;
 
@@ -577,13 +598,15 @@ loadMovers(stocks);
 
 }catch(error){
 
-console.log("Stocks Error:",error);
+console.log(error);
 
 }
 
 }
 
-/* SEARCH */
+/* =========================
+SEARCH STOCKS
+========================= */
 
 function searchStocks(){
 
@@ -592,21 +615,21 @@ document.getElementById("searchInput")
 .value
 .toUpperCase();
 
-let rows =
-document.querySelectorAll("#stockTableBody tr");
+let cards =
+document.querySelectorAll(".stock-card");
 
-rows.forEach(row => {
+cards.forEach(card => {
 
 let text =
-row.innerText;
+card.innerText;
 
 if(text.toUpperCase().indexOf(input) > -1){
 
-row.style.display = "";
+card.style.display = "";
 
 }else{
 
-row.style.display = "none";
+card.style.display = "none";
 
 }
 
@@ -614,7 +637,9 @@ row.style.display = "none";
 
 }
 
-/* TOP MOVERS */
+/* =========================
+TOP MOVERS
+========================= */
 
 function loadMovers(stocks){
 
@@ -661,7 +686,9 @@ ${stock[4]}%
 
 }
 
-/* AUTO LOAD */
+/* =========================
+AUTO LOAD
+========================= */
 
 loadIndices();
 loadStocks();
